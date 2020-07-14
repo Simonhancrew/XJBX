@@ -1,7 +1,6 @@
 # 算法学习
 
-## Leetcode做题的一些解法
-
+## Leetcode题解
 
 + [C++](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/LeetCode/CPP)
 
