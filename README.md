@@ -11,7 +11,7 @@
 ---
 + 一本关于面试常见算法最优解的书，实现代码来自newcoder的算法班.
 
-+ - [ ] 用C++重写一次
+- [ ] 用C++重写一次
 
 ## [自己XJB写的东西](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/Algorithm_imp)
 ---
