@@ -1,17 +1,9 @@
 #include <vector>
 #include <string>
 using namespace std;
-
+//所有的回溯可以理解为树的深搜，列出所有情况。根据需要进行减枝。
 class Solution {
 public:
-    vector<string> restoreIpAddresses(string s) {
-        if(s.size()<4) return res;
-        vector<string>path;
-        DFS(s,0,path);
-        return res;
-    }
-private:
-    vector<string> res;//存放最终的结果
     //path存放此时从s[0,...,pos-1]找到的ip子串，size最大值为4    
     void DFS(const string& s, int pos, vector<string>& path){
         int maxSize = (4-path.size())*3;//剩余位数的最大长度，最大为12
@@ -43,4 +35,12 @@ private:
             return false;//当ip子串长度大于2时,开头不能为0
         return true;
     }
+    vector<string> restoreIpAddresses(string s) {
+        if(s.size()<4) return res;
+        vector<string>path;
+        DFS(s,0,path);
+        return res;
+    }
+private:
+    vector<string> res;//存放最终的结果
 };
