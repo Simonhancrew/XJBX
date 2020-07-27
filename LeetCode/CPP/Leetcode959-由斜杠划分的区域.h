@@ -1,7 +1,7 @@
+//每个正方形分成4小块，遇到不同的符号合并03，12或者01，23.然后上下相邻的三角形合并
 #include <vector>
 #include <string>
 using namespace std;
-//利用并查集处理，格子四个点。
 class Solution {
 public:
     vector<int> f;
@@ -10,40 +10,42 @@ public:
         return x==f[x] ? x : f[x]=find(f[x]);
     }
 
-    int merge(int u, int v) {
+    void merge(int u, int v) {
         int fu = find(u), fv = find(v);
-        if (fu == fv) return 0;
+        if (fu == fv) return;
         f[fv] = fu;
-        return 1;
     }
 
     int regionsBySlashes(vector<string>& grid) {
         int n = grid.size();
-        f = vector<int>((n+1)*(n+1), 0);
-        for (int i = 0; i < (n+1)*(n+1); ++i) {
+        f = vector<int>(4*n*n, 0);
+        for (int i = 0; i < 4*n*n; ++i) {
             f[i] = i;
         }
         for (int i = 0; i < n; ++i) {
-            merge(i, i+1);
-            merge(n*(n+1)+i, n*(n+1)+i+1);
-            merge(i*(n+1), (i+1)*(n+1));
-            merge(i*(n+1)+n, (i+1)*(n+1)+n);
-        }
-        int cnt = 1;
-        for (int i = 0; i < n; ++i) {
             for (int j = 0; j < n; ++j) {
-                if (grid[i][j] == ' ') continue;
-                int u, v;
+                int s = 4*(i*n+j);
                 if (grid[i][j] == '/') {
-                    u = i*(n+1)+j+1;
-                    v = (i+1)*(n+1)+j;
+                    merge(s, s+3);
+                    merge(s+1, s+2);
                 } else {
-                    u = i*(n+1)+j;
-                    v = (i+1)*(n+1)+j+1;
+                    merge(s, s+1);
+                    merge(s+2, s+3);
                 }
-                if (!merge(u, v)) cnt++;
+                if (grid[i][j] == ' ') {
+                    merge(s, s+3);
+                }
+                if (i > 0) merge(s, s-4*n+2);
+                if (i < n-1) merge(s+2, s+4*n);
+                if (j > 0) merge(s+3, s-3);
+                if (j < n-1) merge(s+1, s+7);
             }
+        }
+        int cnt = 0;
+        for (int i = 0; i < 4*n*n; ++i) {
+            if (find(i) == i) cnt++;
         }
         return cnt;
     }
 };
+

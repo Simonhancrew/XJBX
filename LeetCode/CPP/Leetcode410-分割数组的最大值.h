@@ -1,4 +1,5 @@
-// need to rethink
+// 数组分割考虑动态规划
+//本题考虑使分割数组的最大值尽可能的小，形如此类问题都可以考虑有没有二分的解法
 
 class Solution {
 public:
