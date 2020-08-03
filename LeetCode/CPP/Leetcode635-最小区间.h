@@ -41,7 +41,7 @@ public:
     }
 };
 //稍微优雅一点的解法，滑动窗口
-class Solution {
+class Solution2 {
 public:
     vector<int> smallestRange(vector<vector<int>>& nums) {
         int n = nums.size();
