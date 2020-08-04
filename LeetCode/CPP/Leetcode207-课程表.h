@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <queue>
 using namespace std;
 struct GraphNode {
     int label;
@@ -7,6 +8,7 @@ struct GraphNode {
     GraphNode(int x) :label(x) {};
 };
 
+//深度优先搜索 
 class Solution {
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
@@ -46,5 +48,40 @@ private:
         }
         visit[node->label] = 1;
         return true;
+    }
+};
+
+//广度优先，顺序思考。减少每个节点相连的节点的入度，如有相邻节点的入度为0则可以开始学习。
+class Solution2{
+private:
+    vector<int> inpower;
+    vector<vector<int>> edge;
+public:    
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites){
+        inpower.resize(numCourses);
+        edge.resize(numCourses);
+        for(auto info:prerequisites){
+            ++inpower[info[0]];
+            edge[info[1]].push_back(info[0]);
+        }
+        queue<int> que;S
+        for(int i = 0;i<numCourses;i++){
+            if(inpower[i] == 0){
+                que.push(i);
+            }
+        }
+        int visit = 0;
+        while(!que.empty()){
+            int a = que.front();
+            que.pop();
+            ++visit;
+            for(int v:edge[a]){
+                --inpower[v];
+                if(inpower[v] == 0){
+                    que.push(v);
+                }
+            }
+        }
+        return visit == numCourses;
     }
 };
