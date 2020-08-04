@@ -64,7 +64,7 @@ public:
             ++inpower[info[0]];
             edge[info[1]].push_back(info[0]);
         }
-        queue<int> que;S
+        queue<int> que;
         for(int i = 0;i<numCourses;i++){
             if(inpower[i] == 0){
                 que.push(i);
