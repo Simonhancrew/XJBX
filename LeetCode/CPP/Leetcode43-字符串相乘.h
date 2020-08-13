@@ -13,6 +13,7 @@ public:
         for (int i = n - 1; i >= 0; i--) {
             string curr;
             int add = 0;
+            //for loop 是为了补0，进位之后的乘法后面会补上相应的0
             for (int j = n - 1; j > i; j--) {
                 curr.push_back(0);
             }
