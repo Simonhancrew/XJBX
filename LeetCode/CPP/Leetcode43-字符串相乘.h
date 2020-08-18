@@ -37,7 +37,7 @@ public:
         return ans;
     }
 private:
-    string addStrings(string &num1,string &nums2){
+    string addStrings(string &num1,string &num2){
         int n = num1.size()-1,m = num2.size()-1;
         int add = 0;
         string ans = "";
