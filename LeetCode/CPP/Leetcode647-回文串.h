@@ -44,7 +44,7 @@ public:
         int n = help.size();
         auto f = vector<int> (n);//其实说到底manacher也是一种动态规划
         int iMax = 0,rMax = 0,result = 0;
-        for(int i =1;i<n-1;i++){
+        for(int i =1;i<n-1;i++){//最初和最后的没必要进入循环，省点时间
             //开始扩展每个字符的回文半径,三种情况，但只要i在回文界内，最少都是min(f[2*iMax-i],rMax-i+1)
             f[i] = (i<rMax)?min(f[2*iMax-i],rMax-i+1):1;
             //中心扩展，在回文界内需要判断回文界是否可以更新。不在回文界就判断新的回文半径和回文中心
@@ -53,7 +53,6 @@ public:
             if(i+f[i]-1>rMax){
                 iMax = i;//需要更新以下回文半径和新的和新的回文中心
                 rMax = i+f[i]+1;
-
             }
             //结果就是每一个(f[i]-1)/2的累加，向上取整->是s中的字符代表奇数中心，#代表偶数中心
             result += (f[i]/2 );
