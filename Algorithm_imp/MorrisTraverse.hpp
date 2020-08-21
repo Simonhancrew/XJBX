@@ -2,6 +2,7 @@
 #include<iostream>
 using namespace std;
 //morris遍历利用了大量空右孩子的信息，达到了附加空间为O(1)的访问遍历
+//一个有左孩子的节点会到达两次
 class Morristraverse{
     //morris的前序遍历
     void MorrisPre(TreeNode* root){
@@ -62,6 +63,7 @@ class Morristraverse{
         }
     }
     //后序遍历？？？？？？？？？？？?
+    //后序可能会引入一点空间复杂度，个人觉得没必要
     void MorrisPos(TreeNode* root){
         //help help help
     }
