@@ -2,6 +2,7 @@
 #include<vector>
 #include<algorithm>
 #include<utility>
+#include<stack>
 using namespace std;
 //中序遍历计入数组，然后将数组变成有序，然后在bst中进行还原
 class Solution1 {
@@ -54,6 +55,37 @@ public:
 private:
     vector<int> nums;
 };
+//中序遍历，自己压栈
+class Solution3 {
+public:
+    void recoverTree(TreeNode* root) {
+        stack<TreeNode*> stk;
+        TreeNode* x = nullptr;
+        TreeNode* y = nullptr;
+        TreeNode* pred = nullptr;
+
+        while (!stk.empty() || root != nullptr) {
+            while (root != nullptr) {
+                stk.push(root);
+                root = root->left;
+            }
+            root = stk.top();
+            stk.pop();
+            if (pred != nullptr && root->val < pred->val) {
+                y = root;
+                if (x == nullptr) {
+                    x = pred;
+                }
+                else break;
+            }
+            pred = root;
+            root = root->right;
+        }
+
+        swap(x->val, y->val);
+    }
+};
+
 //morris遍历，不需要多余空间复杂度的一种优雅遍历，利用的节点的nullptr信息完成遍历
 //一定要掌握
 class Solution {
