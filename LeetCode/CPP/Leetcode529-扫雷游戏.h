@@ -36,7 +36,7 @@ public:
         int x =click[0], y = click[1];
         if(board[x][y] == 'M'){
             //到地雷，直接结束
-            board[x][y] == 'X';
+            board[x][y] = 'X';
             return board;
         }else{
             DFS(board,x,y);
