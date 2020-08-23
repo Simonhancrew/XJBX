@@ -20,5 +20,10 @@
     
     > 参考：http://hur.st/bloomfilter
 
++ [Morris遍历](https://github.com/Simonhancrew/LearningAlgorithm/blob/master/Algorithm_imp/MorrisTraverse.hpp)
+    > 一种树的遍历算法，前中序很有趣，基本可以实现O(1)的额外空间复杂度。后序个人觉得没必要，因为有些操作感觉会引入一点额外的时间复杂度。
+    
+    > 主要是利用了叶子节点的空悬孩子的信息
+
 ## [对数器的C++实现](https://github.com/Simonhancrew/LearningAlgorithm/blob/master/comparing_figure_device.cpp)
 ---
