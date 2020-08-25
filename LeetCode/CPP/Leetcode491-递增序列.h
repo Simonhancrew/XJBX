@@ -13,10 +13,13 @@ public:
     }
 private:
     void DFS(const vector<int> &nums,vector<vector<int>> &result,vector<int> &subsequense,int startIndex){
+        //回溯的过程中利用u_set去重复，更简洁的话可以自己封装去重复部分
+        //去重的意义，回溯之后的下一把，如果遇到重复的num会push_back到result里不应该存在的子序列
         unordered_set<int> used;
         if(subsequense.size()>1){
             result.push_back(subsequense);
         }
+        //处理每一个数字，现在要处理的从index开始，是否加入subsequense的子序列
         for(int i = startIndex;i<nums.size();i++){
             if((subsequense.empty()||nums[i]>=subsequense.back())&&used.find(nums[i])==used.end()){
                 subsequense.push_back(nums[i]);
