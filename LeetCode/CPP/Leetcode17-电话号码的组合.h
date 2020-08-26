@@ -2,6 +2,9 @@
 #include<string>
 #include<unordered_map>
 using namespace std;
+//最好到临界区加回溯，然后找准进入result的条件
+//更优化空间可以自己压栈
+//循环可以加到递归函数里，没必要放外面
 class Solution{
 public:
     vector<string> letterCombinations(const string &digits){
