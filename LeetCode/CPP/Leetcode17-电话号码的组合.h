@@ -4,7 +4,21 @@
 using namespace std;
 //最好到临界区加回溯，然后找准进入result的条件
 //更优化空间可以自己压栈
+/* 一个回溯的模板
+backtracking() {
+    if (终止条件) {
+        存放结果;
+    }
+
+    for (枚举同一个位置的所有可能性，可以想成节点孩子的数量) {
+        递归，处理节点;
+        backtracking();
+        回溯，撤销处理结果
+    }
+}
+*/
 //循环可以加到递归函数里，没必要放外面
+//
 class Solution{
 public:
     vector<string> letterCombinations(const string &digits){
