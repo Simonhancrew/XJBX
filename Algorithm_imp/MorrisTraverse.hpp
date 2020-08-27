@@ -1,4 +1,4 @@
-#include "/home/space/LearningAlgorithm/LeetCode/CPP/ADT.hpp"
+#include "./ADT.hpp"
 #include<iostream>
 using namespace std;
 //morris遍历利用了大量空右孩子的信息，达到了附加空间为O(1)的访问遍历
