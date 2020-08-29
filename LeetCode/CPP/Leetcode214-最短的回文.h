@@ -29,39 +29,46 @@ private:
     }
 };
 //用kmp，连接s和s逆，最长公共前后缀就是回文部分，，其余部分逆放前面就可以
+#include<string>
+#include<vector>
+#include<algorithm>
+#include<iostream>
+using namespace std;
+//用kmp，连接s和s逆，最长公共前后缀就是回文部分，，其余部分逆放前面就可以
 class Solution2 {
 public:
-    int compute_next(const string &pattern){
-        vector<int> next(pattern.size()+1,0);
+    int compute_next(const string& pattern) {
+        vector<int> next(pattern.size() + 1, 0);
         next[0] = -1;
         next[1] = 0;
         //pos遍历next数组，jump是最长前缀的下标后一位
-        int pos = 2,jump = 0;
-        while(pos<next.size()){
-            if(pattern[pos-1] == pattern[jump]){
-                next[pos] = jump+1;
+        int pos = 2, jump = 0;
+        while (pos < next.size()) {
+            if (pattern[pos - 1] == pattern[jump]) {
+                next[pos] = jump + 1;
                 jump = next[pos];
                 ++pos;
-            }else if(jump == 0){
+            }
+            else if (jump == 0) {
                 next[pos] = 0;
                 pos++;
-            }else{
+            }
+            else {
                 jump = next[jump];
             }
         }
-        return next[next.size()-1];
-    } 
+        return next[next.size() - 1];
+    }
 
-    string shortestPalindrome(const string &s) {
-        if(s == ""){
+    string shortestPalindrome(const string& s) {
+        if (s == "") {
             return "";
         }
-        string reverse = "";
-        for (int i = s.size() - 1; i >= 0; --i) {
-            reverse += s[i];
-        }
-        string pattern = s+'#'+reverse;
+        string reverseTheString (s.size(),' ');
+        reverseTheString.reserve(s.size());
+        reverse_copy(s.begin(), s.end(), reverseTheString.begin());
+        string pattern = s + '#' + reverseTheString;
         int max_len = compute_next(pattern);
-        return reverse.substr(0, reverse.size() - max_len) + s;
+        return reverseTheString.substr(0, reverseTheString.size() - max_len) + s;
     }
 };
