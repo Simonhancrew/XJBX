@@ -42,7 +42,7 @@ public:
 		next.resize(m.size());
 		next[0] = -1;
 		next[1] = 0;
-		//pos是来到的位置，cn是往前跳到的位置
+		//pos是来到的位置，cn是往前跳到的位置（就是最长前缀的位置）
 		int pos = 2, cn = 0;
 		//假设i位置之前所有得next数组得值都得到了，那我们看str2中next[i-1]的位置是否等于str2[i-1],等的话next[i] = next[i-1]+1
 		//假如不等可以继续从str2中next[i-1]的位置往前跳
