@@ -48,11 +48,12 @@ public:
 		//假如不等可以继续从str2中next[i-1]的位置往前跳
 		while (pos < next.size()) {
 			//当前位置之前一位位置的值和跳到的位置一样
-			if (m[pos - 1] == m[cn]) {
+			if (m[pos - 1] == m[cn]) {//next数组的索引比原pattern字符串少一    ------X
 				//公共前缀长度就是cn++
 				next[pos++] = ++cn;
 			}
 			//假如前一步不相等的话，如果还能往前跳，跳到next数组的值的位置
+			//即使cn位置之前的最长公共前后缀的位置
 			else if (cn > 0) {
 				cn = next[cn];
 			}
