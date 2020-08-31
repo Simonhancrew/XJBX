@@ -24,3 +24,27 @@ private:
         }
     }
 };
+//BFS
+#include <queue>
+class Solution2 {
+public:
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        int n = rooms.size(), num = 0;
+        vector<int> vis(n);
+        queue<int> que;
+        vis[0] = true;
+        que.emplace(0);
+        while (!que.empty()) {
+            int x = que.front();
+            que.pop();
+            num++;
+            for (auto& it : rooms[x]) {
+                if (!vis[it]) {
+                    vis[it] = true;
+                    que.emplace(it);
+                }
+            }
+        }
+        return num == n;
+    }
+};
