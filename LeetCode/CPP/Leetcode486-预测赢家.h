@@ -35,6 +35,6 @@ class Solution2 {
             }
         }
         //保证先手能赢就可以
-        return dp[0][n-1]>0;
+        return dp[0][n-1]>=0;
     }
 };
