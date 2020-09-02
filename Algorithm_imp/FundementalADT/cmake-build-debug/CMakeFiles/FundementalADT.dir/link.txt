@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/FundementalADT.dir/main.cpp.o CMakeFiles/FundementalADT.dir/Bubblesort/BubbleSort.cpp.o  -o FundementalADT 
