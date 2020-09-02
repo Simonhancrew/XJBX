@@ -1,10 +1,10 @@
 #pragma once
 #include <vector>
 using namespace std;
-//11ÖÖÅÅĞòËã·¨µÄÈ«ÊµÏÖ
+//11ç§æ’åºç®—æ³•çš„å…¨å®ç°
 class Mysort {
 public:
-	//Ã°ÅİÅÅĞò
+	//å†’æ³¡æ’åº
 	void BubbleSort(vector<int>& nums) {
 		if (nums.size() == 0) {
 			return;
@@ -24,7 +24,7 @@ public:
 			}
 		}
 	}
-	//¼¦Î²¾ÆÅÅĞò
+	//é¸¡å°¾é…’æ’åº
 	void DoubleDirectionBubbleSort(vector<int>& nums) {
 		if (nums.size() == 0) {
 			return;
@@ -50,7 +50,7 @@ public:
 			}
 		}
 	}
-	//Ñ¡ÔñÅÅĞòO(n*n)£¬²»ÎÈ¶¨
+	//é€‰æ‹©æ’åºO(n*n)ï¼Œä¸ç¨³å®š
 	void ChoosSort(vector<int>& nums) {
 		if (nums.size() == 0) {
 			return;
@@ -67,7 +67,7 @@ public:
 
 		}
 	}
-	//²åÈëÅÅĞò£¬²»ÎÈ¶¨ O(N*N);
+	//æ’å…¥æ’åºï¼Œä¸ç¨³å®š O(N*N);
 	void InsertSort(vector<int>& nums) {
 		if (nums.size() == 0) {
 			return;
@@ -82,7 +82,7 @@ public:
 			nums[j + 1] = cur;
 		}
 	}
-	//Ï£¶ûÅÅĞò,gapÑ¡Ôñ³¤¶ÈÕÛ°ëĞòÁĞ,²»ÎÈ¶¨;
+	//å¸Œå°”æ’åº,gapé€‰æ‹©é•¿åº¦æŠ˜åŠåºåˆ—,ä¸ç¨³å®š;
 	void HillSort(vector<int>& nums) {
 		if (nums.size() == 0) {
 			return;
@@ -100,14 +100,14 @@ public:
 			}
 		}
 	}
-	//¿ìËÙÅÅĞò£¬²»ÎÈ¶¨£»Ã»ÓĞÓÅ»¯µİ¹é°æ±¾£¬Ñ¡ÓÃ»ô¶û·Ö¸î
+	//å¿«é€Ÿæ’åºï¼Œä¸ç¨³å®šï¼›æ²¡æœ‰ä¼˜åŒ–é€’å½’ç‰ˆæœ¬ï¼Œé€‰ç”¨éœå°”åˆ†å‰²
 	void QuickSort(vector<int>& nums) {
 		if (nums.size() == 0) {
 			return;
 		}
 		hoareSort(nums, 0, nums.size() - 1);
 	}
-	//¹é²¢ÅÅĞò£¬ÎÈ¶¨
+	//å½’å¹¶æ’åºï¼Œç¨³å®š
 	void mergeSort(vector<int>& nums) {
 		mergeSort(nums, 0, nums.size() - 1);
 	}
@@ -124,7 +124,7 @@ public:
 		merge(nums, L, mid, R);
 
 	}
-	//¶ÑÅÅĞòO£¨nLogn£©²»ÎÈ¶¨
+	//å †æ’åºOï¼ˆnLognï¼‰ä¸ç¨³å®š
 	void priorityqueSort(vector<int>& nums) {
 		if (nums.size() == 0||nums.size()==1) {
 			return;
@@ -135,7 +135,7 @@ public:
 			siftDown(nums, 0, end - 1);
 		}
 	}
-	//¼ÆÊıÅÅĞò£»ÎÈ¶¨O£¨n+k£©,Êı×Ö<k
+	//è®¡æ•°æ’åºï¼›ç¨³å®šOï¼ˆn+kï¼‰,æ•°å­—<k
 	void coutSort(vector<int>& nums, int k) {
 		if (nums.size() == 0) {
 			return;
@@ -158,12 +158,12 @@ public:
 		}
 		nums = tmp;
 	}
-	//Í°ÅÅĞò
-	//»ùÊıÅÅĞò
+	//æ¡¶æ’åº
+	//åŸºæ•°æ’åº
 
 
 private:
-	//¿ìÅÅ
+	//å¿«æ’
 	int hoarePartition(vector<int>& nums, int low, int high) {
 		int pivot = nums[low + (high - low) / 2];
 		int i = low, j = high;
@@ -187,7 +187,7 @@ private:
 			hoareSort(nums, k + 1, high);
 		}
 	}
-	//¹é²¢µÄmerge
+	//å½’å¹¶çš„merge
 	void merge(vector<int>& nums, int L, int mid, int R) {
 		vector<int> tmp(R - L + 1, 0);
 		int i = 0;
@@ -206,7 +206,7 @@ private:
 			nums[L + i] = tmp[i];
 		}
 	}
-	//¶ÑÅÅ
+	//å †æ’
 	void siftDown(vector<int>& nums, int i, int end) {
 		int parent = i, child = 2 * parent + 1;
 		while (child <= end) {

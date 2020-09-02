@@ -10,7 +10,7 @@ void bubbleSort(int a[],int n){
                 std::swap(a[i],a[i+1]);
                 swp++;
             }
-            cmp++
+            cmp++;
         }
     }
 }
