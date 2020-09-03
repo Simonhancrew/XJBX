@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #include <vector>
 #include <set>
 #include <string>
@@ -71,18 +70,27 @@ public:
         solve(solutions, queens, n, 0, 0, 0, 0);
         return solutions;
     }
-
+    //因为每次只用考虑下一行能放皇后的位置，所以用位来表示能放置的位置
     void solve(vector<vector<string>> &solutions, vector<int> &queens, int n, int row, int columns, int diagonals1, int diagonals2) {
+        //回溯模板
         if (row == n) {
             auto board = generateBoard(queens, n);
             solutions.push_back(board);
         } else {
+            //columns,diagonals1,diagonals2分别是列和斜边两个方向
+            //其值为1的位表示不能放置皇后了
+            //(2**n-1)&(~(columns | diagonals1 | diagonals2))就可以得到可以放置皇后的位置
             int availablePositions = ((1 << n) - 1) & (~(columns | diagonals1 | diagonals2));
+            //有位置可放,重复放置
             while (availablePositions != 0) {
+                //得到最低位1的位置
                 int position = availablePositions & (-availablePositions);
+                //将最低位1置为0
                 availablePositions = availablePositions & (availablePositions - 1);
+                //返回position的二进制下末尾的0的个数,可以得到放置皇后的位置
                 int column = __builtin_ctz(position);
                 queens[row] = column;
+                //回溯
                 solve(solutions, queens, n, row + 1, columns | position, (diagonals1 | position) >> 1, (diagonals2 | position) << 1);
                 queens[row] = -1;
             }
