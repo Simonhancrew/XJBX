@@ -49,14 +49,17 @@ private:
         }
         //从上到下，放皇后
         for (int i = 0; i < n; i++) {
-            auto tmp = mark;
-            mark[k][i] = 1;
-            location[k][i] = 'Q';
-            put_down_the_queen(k, i, mark);
-            generate(k + 1, n, location, result, mark);
-            //回溯
-            mark = tmp;
-            location[k][i] = '.';
+            //判断能不能放
+            if(mark[k][i] == 0){
+                auto tmp = mark;
+                mark[k][i] = 1;
+                location[k][i] = 'Q';
+                put_down_the_queen(k, i, mark);
+                generate(k + 1, n, location, result, mark);
+                //回溯
+                mark = tmp;
+                location[k][i] = '.';
+            }
         }
     }
 };
