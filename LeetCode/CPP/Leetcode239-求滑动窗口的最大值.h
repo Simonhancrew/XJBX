@@ -35,11 +35,11 @@ private:
                 que.pop_front();
             }
         }
-        //如果push的元素大于front的元素，则将front的元素pop掉
-        //直到push的数值小于等于入口处的数值
+        //如果push的元素大于back的元素，则将back的元素pop掉
+        //直到push的数值小于等于back处的数值
         void push(int value){
-            while(!que.empty() && value>que.front()){
-                que.pop_front();
+            while(!que.empty() && value>que.back()){
+                que.pop_back();
             }
             que.push_back(value);
         }
