@@ -24,15 +24,22 @@ public:
         auto cmp = [](pair<int,int> &m,pair<int,int> &n){
             return m.second>n.second;
         };
+        //还可以使用operator()构建comparison,graeter本来就是一个类里有一个operator（）的重载
+        class myComparison{
+            bool operator()(const pair<int,int> &lhs,const pair<int,int> &rhs){
+                return lhs.second>rhs.second;
+            }
+        };
         priority_queue<pair<int,int>,vector<pair<int,int>>,decltype(cmp)> q(cmp);
-        for(auto [num,count]:occur){
+        //priority_queue<pair<int,int>,vector<pair<int,int>>,myComparison> q;
+        for(auto fre:occur){
             if(q.size() == k){
-                if(q.top().second<count){
+                if(q.top().second<fre.second){
                     q.pop();
-                    q.push({num,count});
+                    q.push(fre);
                 }
             }else{
-                q.push({num,count});
+                q.push(fre);
             }
         }
         while(!q.empty()){
