@@ -8,19 +8,13 @@ typedef int Rank;//
 #define DEFAULT_CAPACITY 3 //init start capacity
 template <typename T> class Vector {
 protected:
-    Rank _size; int _capacity; T *_elem; //规模、容量、数据区
+    Rank _size; //规模
+    int _capacity; //容量
+    T *_elem; //数据区
     void copyFrom(T const *A, Rank lo, Rank hi);//复制数组区
     void expand();//空间不足扩容
     void shrink();//装填不足收缩
-    bool bubble(Rank lo,Rank hi);//扫描交换
-    void bubbleSort(Rank lo,Rank hi);//冒泡排序
     Rank max(Rank lo,Rank hi);//选取最大的元素
-    void selectionSort(Rank lo,Rank hi);//选择排序
-    void merge(Rank lo,Rank mi,Rank hi);//归并
-    void mergeSort(Rank lo,Rank hi);//归并排序
-    void heapSort(Rank lo,Rank hi);//堆排
-    void quickSort(Rank lo, Rank hi);//快排
-    void shellSort(Rank lo,Rank hi);//希尔排序
 public:
     //构造函数
     Vector(int c = DEFAULT_CAPACITY,int s = 0,T v = 0){
