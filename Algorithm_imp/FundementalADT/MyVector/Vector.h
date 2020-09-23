@@ -56,6 +56,6 @@ public:
     int uniquify();//有序去重
     //遍历
     void traverse(void(*)(T&));//遍历，用函数指针，只读或者局部修改
-    template <typename VST> void traverse ( VST& ); //遍历（使用函数对象，可全局性修改）
+     template <typename VST> void traverse ( VST& ); //遍历（使用函数对象，可全局性修改）
 };
 #endif //FUNDEMENTALADT_VECTOR_H
