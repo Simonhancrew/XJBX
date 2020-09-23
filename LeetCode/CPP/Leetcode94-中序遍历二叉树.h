@@ -37,6 +37,7 @@ public:
             res.push_back(root->val);
             root = root->right;
         }
+        return res;
     }
 };
 
