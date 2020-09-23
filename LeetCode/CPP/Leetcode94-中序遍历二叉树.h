@@ -27,6 +27,8 @@ public:
     vector<int> inorderTraversal(TreeNode* root){
         vector<int> res;
         stack<TreeNode*> st;
+        //相较前中，不能直接push入根节点。因为要找到最左的节点
+        //并让他在栈的头部，所以while需要一些别的设计
         while(root !=nullptr||!st.empty()){
             while(root != nullptr){
                 st.push(root);
