@@ -1,5 +1,6 @@
 #include "ADT.hpp"
 #include <stack>
+//选用先序，交换节点的左右孩子
 //递归
 class Solution {
 public:
