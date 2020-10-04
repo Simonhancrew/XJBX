@@ -1,3 +1,4 @@
+#include "ADT.hpp"
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
@@ -22,6 +23,7 @@ public:
                sum+=1;
            }
            head3->next = new ListNode(sum%10);
+           //不要忘记将head3也向前推进
            head3 = head3->next;
            carry = sum>=10?1:0;
 
