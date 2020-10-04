@@ -13,17 +13,17 @@
 
 - [ ] 用C++重写一次
 
-## [自己XJB写的东西](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/Algorithm_imp)
+## [自己XJB写的东西](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/XJBX)
 ---
- - [BloomFilter](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/Algorithm_imp/Bloomfilter)
+ - [BloomFilter](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/XJBX/Bloomfilter)
     > 一个参考Cassandra中的BloomFilter实现，Hash选用MurmurHash2，通过双重散列公式生成散列函数
     
     > 参考：http://hur.st/bloomfilter
 
-+ [Morris遍历](https://github.com/Simonhancrew/LearningAlgorithm/blob/master/Algorithm_imp/MorrisTraverse.hpp)
++ [Morris遍历](https://github.com/Simonhancrew/LearningAlgorithm/blob/master/XJBX/SCL//MorrisTraverse.hpp)
     > 一种树的遍历算法，前中序很有趣，基本可以实现O(1)的额外空间复杂度。后序个人觉得没必要，因为有些操作感觉会引入一点额外的时间复杂度。
     
     > 主要是利用了叶子节点的空悬孩子的信息
 
-## [对数器的C++实现](https://github.com/Simonhancrew/LearningAlgorithm/blob/master/comparing_figure_device.cpp)
+## [对数器的C++实现](https://github.com/Simonhancrew/LearningAlgorithm/blob/master/XJBX/comparing_figure_device.cpp)
 ---
