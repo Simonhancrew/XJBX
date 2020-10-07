@@ -51,3 +51,24 @@ public:
         return ans;
     }
 };
+
+//改迭代后序
+#include <stack>
+class Solution {
+public:
+    int sumOfLeftLeaves(TreeNode* root) {
+        stack<TreeNode*> stk;
+        if(root) stk.push(root);
+        int result = 0;
+        while(!stk.empty()){
+            auto tmp = stk.top();
+            stk.pop();
+            if(tmp->left != nullptr && tmp->left->left == nullptr && tmp->left->right == nullptr){
+                result += tmp->left->val;
+            }
+            if(tmp->left) stk.push(tmp->left);
+            if(tmp->right) stk.push(tmp->right);
+        }
+        return result;
+    }
+};
