@@ -17,6 +17,7 @@ public:
     }
 private:
     TreeNode* buildTreeNode(int lhs,int rhs,vector<int> inorder,vector<int> postorder){
+        //数组为空的话就结束了
         //递归终止条件
         if(lhs>rhs){
             return nullptr;
