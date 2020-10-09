@@ -17,6 +17,8 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 //n叉树
+#include <vector>
+using namespace std;
 class Node {
 public:
     int val;
