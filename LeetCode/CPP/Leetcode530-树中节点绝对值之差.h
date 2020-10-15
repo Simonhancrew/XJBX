@@ -28,3 +28,31 @@ private:
         DFS(root->right, pre, ans);
     }
 };
+
+//迭代的方法
+#include <stack>
+using std::stack;
+class Solution {
+public:
+    int getMinimumDifference(TreeNode* root){
+        stack<TreeNode*> stk;
+        TreeNode* cur = root;
+        TreeNode* pre = nullptr;
+        int res = INT_MAX;
+        while(cur!=nullptr||!stk.empty()){
+            if(cur!=nullptr){
+                stk.push(cur);
+                cur = cur->left;
+            }else{
+                cur = stk.top();
+                stk.pop();
+                if(pre != nullptr){
+                    res = min(res,cur->val-pre->val);
+                }
+                pre = cur;
+                cur = cur->right;
+            }
+        }
+        return res;
+    }
+};
