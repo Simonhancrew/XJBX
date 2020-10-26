@@ -19,7 +19,7 @@
     > 一个参考Cassandra中的BloomFilter实现，Hash选用MurmurHash2，通过双重散列公式生成散列函数
     
     > 参考：http://hur.st/bloomfilter
-+ [FundmentalADT](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/XJBX/FundamentalADT)
++ [FundmentalADT](https://github.com/Simonhancrew/XJBX/tree/master/XJBX/FundementalADT)
     > 自己撸的一些数据结构，参考了邓老师的数据结构和Mark Allen的DS
 
 + [SCL](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/XJBX/SCL)
