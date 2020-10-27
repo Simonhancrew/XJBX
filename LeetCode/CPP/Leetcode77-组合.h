@@ -45,3 +45,31 @@ public:
         return result;
     }
 };
+
+//更深层的理解一下回溯，其实就是一个暴力法,其实就是一个树形的深搜，横向和纵向都有选和不选
+//横向深搜和纵向深搜。少用一个系统栈的递归减少空间
+class Solution {
+public: 
+    vector<int> temp;
+    vector<vector<int>> result;
+    vector<vector<int>> combine(int n, int k) {
+        dfs(1, n, k);
+        return result;
+    }
+private:
+    void dfs(int cur,int n,int k){
+        if (temp.size() + (n - cur + 1) < k) {
+            return;
+        }
+        // 记录合法的答案
+        if (temp.size() == k) {
+            result.push_back(temp);
+            return;
+        }
+        for(int i = cur;i <= n;++i){
+            temp.push_back(i);
+            dfs(i+1,n,k);
+            temp.pop_back();
+        }
+    }
+};
