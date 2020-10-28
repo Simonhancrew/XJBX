@@ -5,11 +5,11 @@
 class Solution {
 public:
     TreeNode* invertTree(TreeNode *root) {
-        if(root == nullptr){
+        if(root == nullptr || (root->left == nullptr && root->right == nullptr)){
             return root;
         }
-        TreeNode *left = root->left;
-        TreeNode *right = root->right;
+        TreeNode *left = invertTree(root->left);
+        TreeNode *right = invertTree(root->right);
         root->left = right;
         root->right = left;
         return root;
