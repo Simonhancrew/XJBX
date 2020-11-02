@@ -18,7 +18,7 @@ public:
         }
         for(int i =start;i<candidates.size() && target-candidates[i]>=0;i++){
             path.push_back(candidates[i]);
-            DFS(i,target-candidates[i]);
+            DFS(i,target-candidates[i]);//因为确定了可以重复选取，所以回溯的index不需要往前推进
             path.pop_back();
         }
     }
