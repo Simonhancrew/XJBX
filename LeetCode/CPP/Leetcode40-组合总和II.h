@@ -74,3 +74,44 @@ private:
         }
     }
 };
+
+//回溯的树，在每一层，和树的每一个完全枝上进行操作
+//统一层，不能选已经用过的数，但一个枝叶上可以
+//同一树枝和同一树层
+//同一树枝可以随便用重复的，但是同一层的不行，之前有一个枝叶用过了就不能用这个重复的了
+class Solution {
+public:
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target){
+        sort(candidates.begin(),candidates.end());
+        //开一个used数组，记录同一层是否使用过某个数
+        vector<bool> used(candidates.size(),false);
+        backtracking(candidates,target,0,0,used);
+        return result;
+    }
+private:
+    vector<vector<int>> result;
+    vector<int> path;
+    void backtracking(vector<int> &candidates,int target,int sum,int startIndex,vector<bool> used){
+        if(sum == target){
+            result.push_back(path);
+            return;
+        }
+        //单层的时候sum + candidates[i] <= target加入去重的剪枝
+        for(int i = startIndex;i < candidates.size() && sum + candidates[i] <= target;++i){
+            //对同一层，如果i和i-1是一个数，且之前的used[i-1] == false，
+            //说明当前是这在层取值，且candidates[i-1]肯定是使用过的，不能选重复的
+            //如果used[i-1] == true,说明已经进入到了枝叶中，,之前的已经选过i位置的值了，随便选重复的数字
+            if(i > 0 && candidates[i-1] == candidates[i] && used[i-1] == false){
+                continue;
+            }
+            sum += candidates[i];
+            path.push_back(candidates[i]);
+            used[i] = true;
+            backtracking(candidates,target,sum,i+1,used);
+            sum -= candidates[i];
+            used[i] = false;
+            path.pop_back();
+
+        }
+    }
+};
