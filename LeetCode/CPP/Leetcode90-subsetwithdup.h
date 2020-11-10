@@ -31,3 +31,33 @@ private:
 
     }
 };
+
+#include <algorithm>
+class Solution {
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<bool> used(nums.size(),false);
+        sort(nums.begin(),nums.end());
+        path.clear();
+        res.clear();
+        backtrack(nums,0,used);
+        return res;
+    }
+private:
+    vector<int> path;
+    vector<vector<int>> res;
+    void backtrack(vector<int> &nums,int startIndex,vector<bool> &used){
+        res.push_back(path);
+        for(int i = startIndex;i<nums.size();++i){
+            //同之前子集一样，看层是否重复。used是ture的话说明在枝上用过，可以继续使用
+            if(i > 0 && nums[i-1] == nums[i] && used[i-1] == false){
+                continue;
+            }
+            path.push_back(nums[i]);
+            used[i] = true;
+            backtrack(nums,i+1,used);
+            used[i] = false;
+            path.pop_back();
+        }
+    }
+};
