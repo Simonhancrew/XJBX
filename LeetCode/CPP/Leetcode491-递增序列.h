@@ -2,6 +2,8 @@
 #include <stack>
 #include <unordered_set>
 using namespace std;
+//不能排序的时候的used表的方法
+//能排序的时候used数组，前后元素相等，且used[i-1] == false说明用过；
 class Solution {
 public:
     //DFS加回溯
@@ -18,6 +20,7 @@ private:
         unordered_set<int> used;
         if(subsequense.size()>1){
             result.push_back(subsequense);
+            //注意不加return,取遍所有的可行值
         }
         //处理每一个数字，现在要处理的从index开始，是否加入subsequense的子序列
         for(int i = startIndex;i<nums.size();i++){
@@ -26,6 +29,7 @@ private:
                 DFS(nums,result,subsequense,i+1);
                 subsequense.pop_back();
                 used.insert(nums[i]);
+                //对于本层的used，之后的去重
             }
         }
     }
