@@ -3,6 +3,8 @@
 #include <unordered_map>
 #include <map>
 using namespace std;
+//认识到这题这需要在整个的递归树上找到一个最优解即可，所以可以选择用bool的返回值去加速
+//参考Leetcode112题，不需要去遍历整棵树的话其实就不需要返回值
 class Solution {
 public:
     vector<string> findItinerary(vector<vector<string>>& tickets) {
@@ -24,6 +26,7 @@ private:
     unordered_map<string, map<string, int>> flytos;
     bool backtracking(int ticketNum, int index, vector<string>& result) {
         //如果到了最后一个城市的位置，入栈。可以套回溯模板
+        //到达的机场数是所有的航班数+1的话
         if (index == ticketNum + 1) {
             return true;
         }
@@ -32,7 +35,9 @@ private:
             if (flyto.second > 0 ) { // 使用int字段来记录到达城市是否使用过了
                 result.push_back(flyto.first);
                 flyto.second--;
+                //继续下的的过程中找到了这条路，直接返回
                 if (backtracking(ticketNum, index + 1, result)) return true;
+                //没有找到这条路的话popback，回溯
                 result.pop_back();
                 flyto.second++;
             }
