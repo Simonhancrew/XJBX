@@ -5,7 +5,11 @@ using namespace std;
 //ij位置是炸弹就dp[i][j] = 1,然后加上四个方向可以引爆的之前的子问题求出来值
 //注意四个方向的初始化顺序要遵循方向序
 class Solution {
+public:
     int maxKilledEnemies(vector<vector<char>> &grid){
+        if(grid.empty()){
+            return 0;
+        }
         int row = grid.size(),column = grid[0].size();
         if(row == 0||column == 0){
             return 0;
@@ -21,7 +25,7 @@ class Solution {
                 }else{
                     //是enemy，基准1
                     if(grid[i][j] == 'E'){
-                        dp[i][j] == 1;
+                        dp[i][j] = 1;
                     }
                     //上方还有可以传递的子问题
                     if(i > 0){
@@ -34,7 +38,7 @@ class Solution {
         //下面能炸死多少敌人,要反向对dp数组赋值
         for(int i = row-1;i >=0;--i){
             for(int j = 0;j<column;++j){
-                if(grid[i][j] == 0){
+                if(grid[i][j] == 'W'){
                     dp[i][j] = 0;
                 }else{
                     //因为复用了dp数组，所以要重新归零
@@ -56,7 +60,7 @@ class Solution {
                     dp[i][j] = 0;
                 }else{
                     dp[i][j] = 0;
-                    if(grid[i][j] = 'E'){
+                    if(grid[i][j] == 'E'){
                         dp[i][j] = 1;
                     }
                     if(j > 0){
@@ -68,7 +72,7 @@ class Solution {
         }
         //右边能炸死多少
         for(int i = 0;i < row;++i){
-            for(int j = column - 1;j >= 0;++j){
+            for(int j = column - 1;j >= 0;--j){
                 if(grid[i][j] == 'W'){
                     dp[i][j] = 0;
                 }else{
@@ -92,7 +96,6 @@ class Solution {
                 }
             }
         }
-
         return res;
     }
 };
