@@ -158,7 +158,36 @@ public:
 		}
 		nums = tmp;
 	}
-	//桶排序
+	//桶排序，适合数据比较均匀的时候
+	void bucketSort(vector<int>& nums, int bucketSize) {
+		if (nums.size() == 0) return;
+		//找到区间端点值
+		int max = nums[0], min = nums[0];
+		for (auto& num : nums) {
+			if (num > max) max = num;
+			if (num < min) min = num;
+		}
+		//根据算法第四版，bucketSize在5-15之间的时候，插入排序比快排还要快
+		//bucketsize是桶大小，bucketCount是桶的多少
+		int bucketCount = nums.size() / bucketSize;
+		//注意二维数组的初始化
+		vector<vector<int>> buckets(bucketCount,vector<int>());
+		//对于每一个数组中的数，求出它们要放入桶的index，然后放入相应的桶
+		//公式：num-min/(max - min+ 1.0)*bucketcount
+		for (auto num : nums) {
+			int idx = (int)(num - min) / (max - min + 1.0) * bucketCount;
+			buckets[idx].push_back(num);
+		}
+		//原数组的idx
+		int idx = 0;
+		//对每个桶插入排序，然后将值赋值回原数组
+		for (auto &bucket : buckets) {
+			InsertSort(bucket);
+			for (int num : bucket) {
+				nums[idx++] = num;
+			}
+		}
+	}
 	//基数排序
 
 
