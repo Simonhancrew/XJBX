@@ -1,3 +1,5 @@
+#include <vector>
+using namespace std;
 class Solution {
 /* 我们定义一个操作 get(a, l, r) 表示查询 aa 序列 [l, r][l,r] 区间内的最大子段和，
 那么最终我们要求的答案就是 get(nums, 0, nums.size() - 1)。如何分治实现这个操作呢？对于一个区间 [l, r][l,r]，
@@ -42,7 +44,7 @@ public:
     };
 
     Status get(vector<int> &a, int l, int r) {
-        if (l == r) return (Status) {a[l], a[l], a[l], a[l]};
+        if (l == r) return (Status){a[l], a[l], a[l], a[l]};
         int m = (l + r) >> 1;
         Status lSub = get(a, l, m);
         Status rSub = get(a, m + 1, r);
@@ -51,5 +53,44 @@ public:
 
     int maxSubArray(vector<int>& nums) {
         return get(nums, 0, nums.size() - 1).mSum;
+    }
+};
+
+//贪心，有一个序列和为负数的话这个序列之后就没用了，肯定对后面的序列是副作用的
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums){
+        int result = INT32_MIN;
+        int count = 0; 
+        for(int i = 0;i < nums.size();++i){
+            count += nums[i];
+            if(count > result){
+                result = count;
+            }
+            if(count <= 0){
+                count = 0;
+            }
+        }
+        return result;
+    }
+};
+
+//动态规划,序列型，也可以算是坐标型
+//最后一步，在i位置之前的最大自序和,dp更新，要么前i-1位置的子序和加上nums[i]，否则前面的就是负数，nums[i]就是现在的解
+//dp[i] = max(dp[i-1] + nums[i],nums[i])
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        if (nums.size() == 0) return 0;
+        vector<int> dp(nums.size(), 0); // dp[i]表示包括i之前的最大连续子序列和
+        int dp1 = nums[0];
+        int dp2 = INT_MIN;
+        int result = dp1;
+        for (int i = 1; i < nums.size(); i++) {
+            dp2 = max(dp1 + nums[i], nums[i]); // 状态转移公式
+            if (dp2 > result) result = dp2;
+            dp1 = dp2; // result 保存dp[i]的最大值
+        }
+        return result;
     }
 };
