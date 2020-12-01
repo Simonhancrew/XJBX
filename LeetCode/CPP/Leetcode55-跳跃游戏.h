@@ -2,26 +2,26 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
+//找范围的贪心，只要范围能覆盖，就能跳到，不要关心是怎么跳到的
 class Solution {
 public:
-    bool canJump(vector<int>& nums) {
-        vector<int> index;
-        for (auto i = 0; i < nums.size(); i++) {
-            index.push_back(i + nums[i]);
+    bool canJump(vector<int>& nums){
+        if(nums.size() == 0){
+            return false;
         }
-        int jump = 0;
-        int max_index = index[0];
-        while (jump <= max_index && jump < index.size()) {
-            max_index = max(index[jump], max_index);
-            jump++;
-        }
-        if (jump == index.size()) {
-            return true;
+        int index = 0;
+        //在覆盖的范围里更新最大范围
+        for(int i = 0;i <= index;++i){
+            index = max(index,i + nums[i]);
+            if(index >= nums.size() - 1){
+                return true;
+            }
         }
         return false;
     }
 };
-//动态规划
+
+//动态规划，会超时
 //最后一步，假设能跳到
 //回到之前的一步
 class Solution {
