@@ -2,12 +2,12 @@
 
 ## Leetcode题解
 
-+ [C++](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/LeetCode/CPP)
++ [C++](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/Leet&Lint/CPP)
 
 
-+ [PY](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/LeetCode/PY)
++ [PY](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/Leet&Lint/PY)
 
-## [程序员面试指南](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97)
+## [程序员面试指南](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/CodingInterviewGuide)
 ---
 + 一本关于面试常见算法最优解的书，实现代码来自newcoder的算法班.
 
