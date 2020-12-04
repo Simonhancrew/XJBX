@@ -1,10 +1,15 @@
 #include <vector>
 #include <string>
 using namespace std;
-//区间型动态规划
+//最后一步，成功找到了一个最长回文串
+//之前一步，去掉头尾，他仍然是一个回文串
+//此时，长度区间是状态
+//dp[i][j] = max(dp[i+1][j],dp[i][j-1],dp[i+1][j-1] + 2|(s[i] == s[j]))
+//区间型动态规划,坐标型的
 //找回文串长度类的，找到始末位置，要设置成dp[i][j]->i-j位置能不能构成字符串
 //要注意动态规划的状态顺序
 //我们从较短向较长的过度的
+//区间动态规划不能按照i从小到大去算，需要按照j-i的大小，从小到大去算
 class Solution {
 public:
     string longestPalindrome(string s) {
