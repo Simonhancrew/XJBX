@@ -69,3 +69,50 @@ public:
         return ans;
     }
 };
+
+//记忆化的搜素
+class Solution {
+public:
+    string ans = "";
+    vector<vector<int>> memo;
+    string longestPalindrome(string s) {
+        int n = s.size();
+        if (n == 0) {
+            return ans;
+        }
+        for (int i = 0; i < n; ++i) {
+            memo.push_back(vector<int>(n, -1));
+        }
+        compute(s, 0, n - 1);
+        return ans;
+    }
+private:
+    void compute(string& s, int i, int j) {
+        if (i > j || memo[i][j] != -1) {
+            return;
+        }
+        if (i == j) {
+            memo[i][j] = 1;
+            if (ans.size() < j - i + 1) {
+                ans = s.substr(i, j - i + 1);
+            }
+        }
+        else if (i == j - 1) {
+            compute(s, i, i);
+            compute(s, j, j);
+            memo[i][j] = (s[i] == s[j]);
+            if (memo[i][j] && ans.size() < j - i + 1) {
+                ans = s.substr(i, j - i + 1);
+            } 
+        }
+        else {
+            compute(s, i, j - 1);
+            compute(s, i + 1, j);
+            compute(s, i + 1, j - 1);
+            memo[i][j] = (s[i] == s[j]) && memo[i + 1][j - 1];
+            if (memo[i][j] && ans.size() < j - i + 1) {
+                ans = s.substr(i, j - i + 1);
+            }
+        }
+    }
+};
