@@ -1,11 +1,13 @@
 # 每天都在XJB写code
 
-## Leetcode题解
+## [Solution](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/Solution)
 
-+ [C++](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/Leet&Lint/CPP)
++ [C++](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/Solution/CPP)
 
 
-+ [PY](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/Leet&Lint/PY)
++ [PY](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/Solution/PY)
+
++ [GO](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/Solution/Go)
 
 ## [程序员面试指南](https://github.com/Simonhancrew/LearningAlgorithm/tree/master/CodingInterviewGuide)
 ---
