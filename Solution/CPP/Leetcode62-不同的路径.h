@@ -21,3 +21,26 @@ public:
         return dp[m - 1][n - 1];
     }
 };
+
+
+//开2维滚动数组优化的方法
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        int dp[2][n];
+        int old = 0;
+        int now = 1;
+        for(int i = 0;i < m;++i){
+            old = now;
+            now = 1- now;
+            for(int j = 0;j < n;++j){
+                if(i == 0||j == 0){
+                    dp[now][j] = 1;
+                    continue;
+                }
+                dp[now][j] = dp[now][j - 1] + dp[old][j];
+            }
+        }
+        return dp[now][n - 1];
+    }
+};
