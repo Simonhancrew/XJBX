@@ -29,6 +29,7 @@ public:
 
 //开数组记录长度为i的上升子序列的最小结束值，这个数组一定是递增的，可以证明
 //然后二分的找到nums大于的值，这个值取到最大，然后更新数组b[i+1]
+//贪心和2分查找的方法
 #include <climits>
 class Solution {
 public:
@@ -37,13 +38,19 @@ public:
         if(n == 0){
             return 0;
         }
-        int dp[n + 1];
+        //记录长度为i的上升子序列下最小的序列终值
+        //这个序列一定是递增的，可以反证
+        vector<int> dp(n + 1);
+        //将dp[0] 设置为最小，不论如何最小长度都可以到达1
         dp[0] = INT_MIN;
+        //记录当前最长
         int curLongest = 0;
+        //顺序遍历数组
         for(int i = 0;i <=n;++i){
             int start = 0,stop = curLongest;
             int mid;
             int j = 0;
+            //二分的查找序列中的最后一个比nums[i]小的值
             while(start <= stop){
                 mid = (start + stop) / 2;
                 if(dp[mid] < nums[i]){
@@ -54,7 +61,9 @@ public:
                     stop = mid - 1;
                 }
             }
+            //找到当前的插入点，长度+1
             dp[j + 1] = nums[i];
+            //更新长度
             if(j + 1 > curLongest){
                 curLongest = j + 1;
             }
