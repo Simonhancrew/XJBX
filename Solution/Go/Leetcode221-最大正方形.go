@@ -1,11 +1,5 @@
 package Go
 
-func min(x int, y int) int {
-	if x < y {
-		return x
-	}
-	return y
-}
 func maximalSquare(matrix [][]byte) int {
 	m := len(matrix)
 	n := len(matrix[0])
