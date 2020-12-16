@@ -41,3 +41,36 @@ public:
         return true;
     }
 };
+
+//两个哈希表，一个双映射
+//需要考虑string边界的问题
+#include <unordered_map>
+class Solution {
+public:
+    bool wordPattern(string pattern, string s) {
+        unordered_map<string,char> str2chr;
+        unordered_map<char,string> chr2str;
+        string cur = "";
+        int index = 0;
+        int m = s.size();
+        for(auto ch:pattern){
+            if(index >= m){
+                return false;
+            }
+            int j = index;
+            while(j < m && s[j] != ' ') j++;
+            auto tmp = s.substr(index,j - index);
+            if(str2chr.count(tmp) && str2chr[tmp] != ch){
+                return false;
+            }
+            if(chr2str.count(ch) && chr2str[ch] != tmp){
+                return false;
+            }
+            str2chr[tmp] = ch;
+            chr2str[ch] = tmp;
+            index = j + 1;
+        }
+        //patter结束，但是string过长
+        return index >= m;
+    }
+};
