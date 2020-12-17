@@ -26,3 +26,21 @@ public:
         return vector<vector<int>>(que.begin(), que.end());
     }
 };
+
+class Solution {
+public:
+    vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {
+        sort(people.begin(),people.end(),[](vector<int> a,vector<int> b) {
+            return a[0] > b[0] || (a[0] == b[0] && a[1] < b[1]);
+        });
+        vector<vector<int>> que;
+        //队列排序之后按照k插入，先插入身高高的
+        //这样局部小问题时可以满足的
+        //之后推到大问题也可以满足
+        for(int i = 0;i < people.size();++i){
+            int pos = people[i][1];
+            que.insert(que.begin() + pos,people[i]);
+        }
+        return que;
+    }
+};
