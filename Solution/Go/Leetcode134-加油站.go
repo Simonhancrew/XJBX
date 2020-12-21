@@ -17,7 +17,7 @@ func canCompleteCircuit(gas []int, cost []int) int {
 }
 
 //贪心
-func canCompleteCircuit(gas []int, cost []int) int {
+func canCompleteCircuit2(gas []int, cost []int) int {
 	start := 0
 	var curSum, totalSum int
 	for i := 0; i < len(gas); i++ {
