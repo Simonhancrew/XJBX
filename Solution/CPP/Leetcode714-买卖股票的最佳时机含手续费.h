@@ -43,14 +43,26 @@ public:
         int res = 0;
         int minp = prices[0];
         for(int i = 1;i < prices.size();++i){
+            //最开始的状态
+            //找到一个买入点，只要更低了就可以怀疑是一个买入点
             if(prices[i] < minp){
                 minp = prices[i];
             }
+            //一个点，卖出不赚钱，但他确实比低点高，继续往下走，此时我进第二个状态
+            //这个状态可以回到状态一
             if(prices[i] >= minp && prices[i] <= minp + fee){
                 continue;
             }
+            //卖出赚钱了，但我需要考虑后序还能不能赚到更多
+            //我进入当前这个状态
             if(prices[i] > minp + fee){
+                //收集当前的利润
                 res += prices[i] - minp - fee;
+                //下一个点不知道能不能继续增长，但无论如何，
+                //该状态只能保持或者回到状态1，如果回到状态1的话我的minp也是要更新的
+                //下一个点的值只要大于peice[i]就可以继续增，
+                //但此时我假设是没有卖出的，下一步还有fee的影响，要去掉fee带来的负面影响
+                //更新minp减掉一个fee
                 minp = prices[i] - fee;
             }
         }
