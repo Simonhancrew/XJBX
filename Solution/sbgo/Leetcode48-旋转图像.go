@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 //slice值传递可以被修改，slice本身可以理解成一个指针
 
