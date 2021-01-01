@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 type TreeNode struct {
 	Val   int

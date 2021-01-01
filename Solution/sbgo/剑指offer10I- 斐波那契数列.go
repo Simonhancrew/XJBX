@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func fib(n int) int {
 	x, y := 0, 1

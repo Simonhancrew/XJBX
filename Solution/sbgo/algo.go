@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func max(i, j int) int {
 	if i > j {

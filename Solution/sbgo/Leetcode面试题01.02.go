@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 //一个哈希映射
 

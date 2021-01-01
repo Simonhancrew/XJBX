@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func twoSum(nums []int, target int) []int {
 	mp := map[int]int{}
