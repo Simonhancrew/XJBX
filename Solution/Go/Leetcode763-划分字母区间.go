@@ -1,4 +1,4 @@
-package Go
+package go
 
 func partitionLabels(S string) []int {
 	last := [26]int{}

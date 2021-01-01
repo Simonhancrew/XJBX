@@ -1,4 +1,4 @@
-package Go
+package go
 
 func candy(ratings []int) int {
 	n := len(ratings)

@@ -1,4 +1,4 @@
-package Go
+package go
 
 func maximalRectangle(matrix [][]byte) int {
 	if len(matrix) == 0 {

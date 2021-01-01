@@ -1,4 +1,4 @@
-package Go
+package go
 
 //贪心，先灭掉前面的
 //用队列模拟循环，push入坐标

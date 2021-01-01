@@ -1,4 +1,4 @@
-package Go
+package go
 
 func wiggleMaxLength(nums []int) int {
 	n := len(nums)

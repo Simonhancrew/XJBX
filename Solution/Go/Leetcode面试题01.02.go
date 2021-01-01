@@ -1,4 +1,4 @@
-package Go
+package go
 
 //一个哈希映射
 

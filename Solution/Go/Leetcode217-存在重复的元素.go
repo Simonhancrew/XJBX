@@ -1,4 +1,4 @@
-package Go
+package go
 
 //set的map实现
 func containsDuplicate(nums []int) bool {

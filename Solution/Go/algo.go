@@ -1,4 +1,4 @@
-package Go
+package go
 
 func max(i, j int) int {
 	if i > j {

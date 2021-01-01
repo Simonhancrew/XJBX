@@ -1,4 +1,4 @@
-package Go
+package go
 
 func singleNumber(nums []int) int {
 	res := nums[0]

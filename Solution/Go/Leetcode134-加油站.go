@@ -1,4 +1,4 @@
-package Go
+package go
 
 //暴力解
 func canCompleteCircuit(gas []int, cost []int) int {

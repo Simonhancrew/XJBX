@@ -1,4 +1,4 @@
-package Go
+package go
 
 func firstUniqChar(s string) int {
 	mp := [26]int{}

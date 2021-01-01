@@ -1,4 +1,4 @@
-package Go
+package go
 
 import (
 	"container/heap"

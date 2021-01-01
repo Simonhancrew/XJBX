@@ -1,4 +1,4 @@
-package Go
+package go
 
 func minPathSum(grid [][]int) int {
 	if len(grid) == 0 {

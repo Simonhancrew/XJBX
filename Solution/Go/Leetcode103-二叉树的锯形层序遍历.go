@@ -1,4 +1,4 @@
-package Go
+package go
 
 func zigzagLevelOrder(root *TreeNode) [][]int {
 	var ans [][]int

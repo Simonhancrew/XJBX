@@ -1,4 +1,4 @@
-package Go
+package go
 
 //确定不变量，保留一个i去遍历一个字符串，利用这个i去处理重复的
 

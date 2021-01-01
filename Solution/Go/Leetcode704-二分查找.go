@@ -1,4 +1,4 @@
-package Go
+package go
 
 func search(nums []int, target int) int {
 	start := 0

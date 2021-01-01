@@ -1,4 +1,4 @@
-package Go
+package go
 
 func add(a int, b int) int {
 	for b != 0{

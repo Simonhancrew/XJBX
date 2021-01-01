@@ -1,4 +1,4 @@
-package Go
+package go
 
 func maxProfit(k int, prices []int) int {
 	n := len(prices)

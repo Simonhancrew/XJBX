@@ -1,4 +1,4 @@
-package Go
+package go
 
 func lemonadeChange(bills []int) bool {
 	var five = 0

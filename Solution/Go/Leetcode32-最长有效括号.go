@@ -1,4 +1,4 @@
-package Go
+package go
 
 func longestValidParentheses(s string) int {
 	//is this a slice?

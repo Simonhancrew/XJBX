@@ -1,4 +1,4 @@
-package Go
+package go
 
 func fib(n int) int {
 	x, y := 0, 1

@@ -1,4 +1,4 @@
-package Go
+package go
 
 func convert(s string, numRows int) string {
 	if numRows == 1 {

@@ -1,4 +1,4 @@
-package Go
+package go
 
 func minPatches(nums []int, n int) int {
 	res := 0

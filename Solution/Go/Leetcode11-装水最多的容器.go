@@ -1,4 +1,4 @@
-package Go
+package go
 
 func maxArea(height []int) int {
 	i, j := 0, len(height)-1

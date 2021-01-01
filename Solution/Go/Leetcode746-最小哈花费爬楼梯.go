@@ -1,4 +1,4 @@
-package Go
+package go
 
 func minCostClimbingStairs(cost []int) int {
 	n := len(cost)
