@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func search(nums []int, target int) int {
 	start := 0

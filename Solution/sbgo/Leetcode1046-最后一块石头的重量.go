@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 import (
 	"container/heap"

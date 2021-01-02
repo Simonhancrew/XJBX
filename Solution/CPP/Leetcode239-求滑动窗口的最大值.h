@@ -38,7 +38,7 @@ private:
         //如果push的元素大于back的元素，则将back的元素pop掉
         //直到push的数值小于等于back处的数值
         void push(int value){
-            while(!que.empty() && value>que.back()){
+            while(!que.empty() && value > que.back()){
                 que.pop_back();
             }
             que.push_back(value);
@@ -48,4 +48,28 @@ private:
             return que.front();
         }
     };
+};
+
+
+//优先队列
+#include <queue>
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        priority_queue<pair<int,int>> que;
+        for(int i = 0;i < k;++i){
+            que.push({nums[i],i});
+        }
+        vector<int> res;
+        //不要忘记最开始push一头
+        res.push_back(que.top().first);
+        for(int i = k;i < nums.size();++i){
+            que.push({nums[i],i});
+            while(!que.empty() && que.top().second <= i - k){
+                que.pop();
+            }
+            res.push_back(que.top().first);
+        }
+        return res;
+    }
 };

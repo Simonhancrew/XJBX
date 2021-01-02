@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func canPlaceFlowers(flowerbed []int, n int) bool {
 	count := 0

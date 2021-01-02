@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 //时间复杂度是k，k是二进制中1的个数
 

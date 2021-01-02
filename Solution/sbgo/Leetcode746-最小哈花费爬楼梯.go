@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func minCostClimbingStairs(cost []int) int {
 	n := len(cost)
