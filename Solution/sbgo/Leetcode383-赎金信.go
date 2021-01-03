@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func canConstruct(ransomNote string, magazine string) bool {
 	if len(magazine) < len(ransomNote) {

@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func minPatches(nums []int, n int) int {
 	res := 0

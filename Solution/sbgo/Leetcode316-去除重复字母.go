@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 //char是int32
 //但byte能和uint8比较，不能和int32

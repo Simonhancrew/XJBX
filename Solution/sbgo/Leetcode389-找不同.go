@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func findTheDifference(s string, t string) byte {
 	var ss, st byte

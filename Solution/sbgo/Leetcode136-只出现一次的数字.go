@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func singleNumber(nums []int) int {
 	res := nums[0]

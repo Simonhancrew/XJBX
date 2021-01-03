@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func lemonadeChange(bills []int) bool {
 	var five = 0

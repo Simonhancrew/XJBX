@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func candy(ratings []int) int {
 	n := len(ratings)

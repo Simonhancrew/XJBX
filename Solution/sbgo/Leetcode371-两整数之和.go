@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func getSum(a int, b int) int {
 	for b != 0 {

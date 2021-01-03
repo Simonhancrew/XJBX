@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func maxProfit(k int, prices []int) int {
 	n := len(prices)

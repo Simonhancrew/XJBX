@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 type void struct{}
 

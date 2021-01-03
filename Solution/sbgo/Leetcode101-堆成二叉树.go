@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func isSymmetric(root *TreeNode) bool {
 	if root == nil {

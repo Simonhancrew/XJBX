@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func maximalSquare(matrix [][]byte) int {
 	m := len(matrix)

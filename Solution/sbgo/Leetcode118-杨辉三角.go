@@ -1,4 +1,4 @@
-package go
+package sbgo
 
 func generate(numRows int) [][]int {
 	//slice不用append的话就用动态分配一下大小
