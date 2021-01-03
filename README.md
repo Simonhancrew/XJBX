@@ -7,7 +7,7 @@
 
 + [PY](Solution/PY)
 
-+ [GO](Solution/Go)
++ [GO](Solution/sbgo)
 
 ## [程序员面试指南](CodingInterviewGuide)
 ---
