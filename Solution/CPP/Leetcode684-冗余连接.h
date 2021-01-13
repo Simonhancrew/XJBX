@@ -1,5 +1,10 @@
 #include <vector>
 using namespace std;
+//无向有环图，有n个节点的话，也有n条边
+//而无向无环图，n节点，n-1条边
+//考虑采用并查集，顺序遍历整个邻接矩阵，如果之前这二者不是一个集合的，将其纳入树中
+//如果此时二者已经在一个集合中了
+//说明出现了环路
 class Solution {
 public:
     vector<int> findRedundantConnection(vector<vector<int>>& edges) {
