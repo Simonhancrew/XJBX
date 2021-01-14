@@ -1,4 +1,4 @@
-//LT1，两数求和
+#LT1，两数求和
 def twoSum(nums, target):
     hashmap={}
     for ind,num in enumerate(nums):
