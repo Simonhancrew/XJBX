@@ -9,6 +9,8 @@
 
 + [GO](Solution/sbgo)
 
++ [Rust](Solution/Rust)
+
 ## [程序员面试指南](CodingInterviewGuide)
 ---
 + 一本关于面试常见算法最优解的书，实现代码来自newcoder的算法班.
