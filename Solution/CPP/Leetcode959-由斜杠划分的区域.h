@@ -24,6 +24,8 @@ public:
         }
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < n; ++j) {
+                //当前到了那一个方块
+                //s是当前第一三角格子
                 int s = 4*(i*n+j);
                 if (grid[i][j] == '/') {
                     merge(s, s+3);
@@ -35,6 +37,7 @@ public:
                 if (grid[i][j] == ' ') {
                     merge(s, s+3);
                 }
+                //合并上下左右的块联通
                 if (i > 0) merge(s, s-4*n+2);
                 if (i < n-1) merge(s+2, s+4*n);
                 if (j > 0) merge(s+3, s-3);
