@@ -9,7 +9,7 @@ public:
 		int index = 0;
 		string res(2*str.size()+1,' ');
 		for (int i = 0; i != res.size(); i++) {
-			res[i] = (i & 1) == 0 ? '#' : str[index++];//²¹#£¬ÈÃÅ¼ÊıÊ±Ò²¿ÉÒÔÏòÁ½±ß±©Á¦À©
+			res[i] = (i & 1) == 0 ? '#' : str[index++];//è¡¥#ï¼Œè®©å¶æ•°æ—¶ä¹Ÿå¯ä»¥å‘ä¸¤è¾¹æš´åŠ›æ‰©
 		}
 		return res;
 	}
