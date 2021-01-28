@@ -20,7 +20,7 @@ public:
         if (i >= 0) {
             int j = nums.size() - 1;
             //注意不调整相等的情况
-            while (j >= 0 && nums[i] >= nums[j]) {
+            while (j >= i+1 && nums[i] >= nums[j]) {
                 //让另一个调整的数尽可能的小
                 j--;
             }
