@@ -4,26 +4,6 @@ using namespace std;
 //11种排序算法的全实现
 class Mysort {
 public:
-	//冒泡排序
-	void BubbleSort(vector<int>& nums) {
-		if (nums.size() == 0) {
-			return;
-		}
-		int n = nums.size();
-		bool swapped;
-		for (int end = n - 1; end > 0; --end) {
-			swapped = false;
-			for (int i = 0; i < end; i++) {
-				if (nums[i] > nums[i + 1]) {
-					swap(nums[i], nums[i + 1]);
-					swapped = true;
-				}
-			}
-			if (!swapped) {
-				return;
-			}
-		}
-	}
 	//鸡尾酒排序
 	void DoubleDirectionBubbleSort(vector<int>& nums) {
 		if (nums.size() == 0) {
