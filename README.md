@@ -1,19 +1,5 @@
 # 每天都在XJB写code
 
-## [Solution](Solution)
-
-+ [C++](Solution/CPP)
-
-
-+ [PY](Solution/PY)
-
-+ [GO](Solution/sbgo)
-
-+ [Rust](Solution/Rust)
-
-## [程序员面试指南](CodingInterviewGuide)
----
-+ 一本关于面试常见算法最优解的书，实现代码来自newcoder的算法班.
 
 ## [自己XJB写的东西](XJBX)
 ---
@@ -36,4 +22,16 @@
 + [对数器的C++实现](XJBX/comparing_figure_device.cpp)
 
 + [递归的思考](XJBX/recursion.h) 
+
+
+## [Solution](Solution)
 ---
++ [C++](Solution/CPP)
+
+
++ [PY](Solution/PY)
+
++ [GO](Solution/sbgo)
+
++ [Rust](Solution/Rust)
+
