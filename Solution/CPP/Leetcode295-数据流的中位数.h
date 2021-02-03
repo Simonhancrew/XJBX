@@ -11,6 +11,9 @@ public:
     priority_queue<int> small;
     priority_queue<int,vector<int>,greater<int>> big;
     void addNum(int num) {
+        //每读入一个数，把最大堆的top push到最小
+        //这个操作可能让最大堆的数变多
+        //所以需要平衡一下
         small.push(num);
         big.push(small.top());
         small.pop();
