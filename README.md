@@ -28,10 +28,12 @@
 ---
 + [C++](Solution/CPP)
 
-
 + [PY](Solution/PY)
 
 + [GO](Solution/sbgo)
 
 + [Rust](Solution/Rust)
 
++ [C#](Solution/C#)
+
++ [Kotlin](Solution/Kotlin)
