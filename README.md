@@ -34,6 +34,6 @@
 
 + [Rust](Solution/Rust)
 
-+ [C#](Solution/C#)
++ [C#](Solution/C%23)
 
 + [Kotlin](Solution/Kotlin)
