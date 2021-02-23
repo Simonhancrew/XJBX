@@ -32,3 +32,32 @@ public:
         return res1;
     }
 };
+
+class Solution{
+public:
+    int rob(vector<int> &nums){
+        int n = nums.size();
+        if(n == 0){
+            return 0;
+        }
+        if (n == 1){
+            return nums[0];
+        }
+        int res1 = rangeRob(nums,0,n - 2);
+        int res2 = rangeRob(nums,1,n - 1);
+        return max(res1,res2);
+    }
+
+    int rangeRob(vector<int> &nums,int start,int end){
+        if(end == start){
+            return nums[start];
+        }
+        vector<int> dp(nums.size());
+        dp[start] = nums[start];
+        dp[start + 1] = max(nums[start],nums[start + 1]);
+        for(int i = start + 2;i <= end;i++){
+            dp[i] = max(dp[i - 2] + nums[i],dp[i-1]);
+        }
+        return dp[end];
+    }
+};
