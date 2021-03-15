@@ -12,7 +12,8 @@ struct TrieNode{
     //数字映射到字母（ 1 -> a）
     TrieNode* child[MAX_CHAR_NUM];
     bool isEndOfWord;
-    TrieNode():isEndOfWord(false){
+    int cnt;
+    TrieNode():isEndOfWord(false),cnt(0){
         for(int i =0;i<MAX_CHAR_NUM;i++){
             child[i] = 0;
         }
@@ -45,6 +46,7 @@ public:
         }
         //将单词结束标记为true
         ptr->isEndOfWord = true;
+        ptr->cnt++;
     }
     //查找
     bool search(const char *word){
