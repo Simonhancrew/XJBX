@@ -29,3 +29,25 @@ public:
         return res;
     }
 };
+
+#include <unordered_set>
+class Solution {
+public:
+    stack<int> stk;
+    void eval(string s){
+        int b = stk.top();stk.pop();
+        int a = stk.top();stk.pop();
+        if(s == "+") stk.push(a+b);
+        else if (s == "-") stk.push(a - b);
+        else if (s == "*") stk.push(a * b);
+        else stk.push(a / b);
+    }
+    int evalRPN(vector<string>& tokens) {
+        unordered_set<string> ss{"+","-","*","/"};
+        for(auto &ch:tokens){
+            if(ss.count(ch)) eval(ch);
+            else stk.push(stoi(ch));
+        }
+        return stk.top();
+    }
+};
