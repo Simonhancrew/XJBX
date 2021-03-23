@@ -110,3 +110,39 @@ public:
         return board;
     }
 };
+
+
+//按照行搜索
+class Solution {
+public:
+    vector<vector<string>> solveNQueens(int n) {
+        col.resize(n),dg.resize(2 * n),rdg.resize(2 * n);
+        board.resize(n,"");
+        for(int i = 0;i < n;i++){
+            for(int j = 0; j < n;j++){
+                board[i].push_back('.');
+            }
+        }
+        dfs(0,n);
+        return res;
+    }
+    void dfs(int u,int n){
+        if(u == n){
+            res.push_back(board);
+            return;
+        }
+        for(int i = 0;i < n;i++){
+            if(!col[i] && !dg[u + i] && !rdg[n - u + i]){
+                board[u][i] = 'Q';
+                col[i] = dg[i+u] = rdg[n - u + i] = 1;
+                dfs(u + 1,n);
+                col[i] = dg[i+u] = rdg[n - u + i] = 0;
+                board[u][i] = '.';
+            }
+        }
+    }
+private:
+    vector<int> col,dg,rdg;
+    vector<vector<string>> res;
+    vector<string> board;
+};
