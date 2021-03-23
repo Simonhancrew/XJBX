@@ -1,0 +1,9 @@
+#folders 
+/.vscode
+
+#compile files
+*.exe
+
+#record or log file
+*.txt
+*.log
