@@ -14,6 +14,7 @@ public:
             mini[i] = min(mini[i-1],nums[i]);
         }
         stack<int> stk;
+        //多少带点贪心，左边最小，右边单调栈
         for(int j= nums.size()-1;j>=0;j--){
             if(nums[j]>mini[j]){
                 while(!stk.empty() && stk.top()<=mini[j]){
@@ -29,6 +30,8 @@ public:
         return false;
     }
 };
+
+//枚举ai,判断ai的后面是否存在ak存在aj,符合要求
 
 int main(){
     vector<int> c = {1,2,3,4};
