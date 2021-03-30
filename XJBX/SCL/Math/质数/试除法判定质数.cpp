@@ -1,4 +1,4 @@
-#incldue <iostream>
+#include <iostream>
 #include <algorithm>
 //质数定义：所有大于1的自然数，只包含1和本身这两个约数就被成为质数
 //或者叫做素数

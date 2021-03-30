@@ -22,8 +22,9 @@ if __name__=="__main__":
         for node,w in g[t]:
             if d[node] > d[t] + w:
                 d[node] = d[t] + w
-                q.append(node)
-                st[node] = 1
+                if st[node] == 0:
+                    q.append(node)
+                    st[node] = 1
         
         
     if d[n] == INF:
