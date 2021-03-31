@@ -50,6 +50,8 @@ private:
         res.push_back(path);
         for(int i = startIndex;i<nums.size();++i){
             //同之前子集一样，看层是否重复。used是ture的话说明在枝上用过，可以继续使用
+            //重新理解一下，就是你用到了相等的可能会重复，这里加一个判断：用到了相等的，且上一个递归层上一定要用过了，这一层才能用这个重复的
+            //不然就肯定会导致重复
             if(i > 0 && nums[i-1] == nums[i] && used[i-1] == false){
                 continue;
             }
