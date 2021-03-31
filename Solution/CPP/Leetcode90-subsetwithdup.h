@@ -63,3 +63,38 @@ private:
         }
     }
 };
+
+
+//另一种思路，对于相同的数，先排序，然后统计看有多少个，放0-k个，k是这个数有多少个
+class Solution {
+public:
+    vector<int> path;
+    vector<vector<int>> res;
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        int n = nums.size();
+        //不用哈希表统计的话一定要排序
+        sort(nums.begin(),nums.end());
+        dfs(0,nums);
+        return res;
+    }
+    void dfs(int u,vector<int> &nums){
+        if(u == nums.size()){
+            res.push_back(path);
+            return;
+        }
+        int k = u;
+        //统计看这个数有多少个
+        while(k < nums.size() && nums[k] == nums[u]) k++;
+        //不放
+        dfs(k,nums);
+        //放1 - k个
+        for(int i = u;i < k;i++){
+            path.push_back(nums[i]);
+            dfs(k,nums);
+        }
+        //记得恢复现场
+        for(int i = u;i < k;i++){
+            path.pop_back();
+        }
+    }
+};
