@@ -1,20 +1,19 @@
 #include <iostream>
-#include <algorithm>
+
+//给定a和p，求a mod p 的乘法逆元，设计费马小定理，对式子进行转换之后就是一个快速幂
+//a 和 p 互质的时候就是求 a ^ (p-2)的值
 
 using namespace std;
 
 typedef long long LL;
-
-//快速幂求解的是pow(a,k) mod p的问题
-//把幂换成二进制加法表示，然后求指数变成乘法原理，乘法分配率，每个mod，相乘，再把结果mod
-//注意数据大的时候要用long long 存数据
-
-int qmi(int a,int k,int p){
+ 
+LL qmi(int a,int k ,int p){
     int res = 1;
     while(k){
+        //乘的过程中可能爆int，所以需要特判
         if(k & 1) res = (LL)res * a % p;
-        k >>= 1;
         a = (LL)a * a % p;
+        k >>= 1;
     }
     return res;
 }
@@ -23,9 +22,12 @@ int main(){
     int n;
     cin >> n;
     while(n--){
-        int a,k,p;
-        scanf("%d%d%d",&a,&k,&p);
-        printf("%d",qmi(a,k,p));
+        int a,p;
+        cin >> a >> p;
+        LL t = qmi(a,p-2,p);
+        //a和p不互质的话，没有结果
+        if (a % p == 0) puts("impossible");
+        else cout << t << endl;
     }
     return 0;
 }
