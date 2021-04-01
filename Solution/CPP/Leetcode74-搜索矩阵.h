@@ -20,3 +20,18 @@ public:
         return false;
     }
 };
+
+//用二分重新做一下
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int n = matrix.size(),m = matrix[0].size();
+        int l = 0,r = m * n - 1;
+        while(l < r){
+            int mid = (r + l) >> 1;
+            if(matrix[mid / m][mid % m] >= target) r = mid;
+            else l = mid + 1;
+        }
+        return matrix[l / m][l % m] == target;
+    }
+};
