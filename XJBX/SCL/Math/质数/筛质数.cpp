@@ -26,14 +26,15 @@ n只会被他的最小质因子筛掉
 */
 void get_prime_linear(int n){
     for(int i = 2;i <= n;i++){
+        //如果是质数就记录下来
         if(!st[i]) primes[cnt++] = i;
-        //
-        for(int j = 0;primes[j] <= n;j++){
+        //从大到小枚举质数，pj一定小于i的质因子
+        for(int j = 0;primes[j] <= n / i;j++){
+            //每一次把i和质数的乘筛掉
             st[primes[j] * i] = true;
             if(i % primes[j] == 0) break; //primes[j]一定是i的最小质因子
         }
     }
- 
 }
 
 int main(){
