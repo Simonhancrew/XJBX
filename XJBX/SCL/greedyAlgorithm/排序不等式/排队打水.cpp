@@ -5,6 +5,8 @@
 using namespace std;
 using LL = long long;
 
+//从小打到排序，然后看每一个位置的贡献
+
 const int N = 1e5 + 10;
 int d[N];
 
