@@ -22,3 +22,30 @@ public:
         return dp[n-1];
     }
 };
+
+#include <queue>
+#include <unordered_set>
+class Solution {
+public:
+    int nthUglyNumber(int n) {
+        int prime[3] = {2,3,5};
+        priority_queue<long,vector<long>,greater<long>> heap;
+        unordered_set<long> hash;
+        hash.insert(1);
+        heap.push(1);
+        long res = 0;
+        for(int i = 0;i < n;i++){
+            auto cur = heap.top();
+            heap.pop();
+            res = cur;
+            for(auto p:prime){
+                long next = cur * p;
+                if(!hash.count(next)){
+                    hash.insert(next);
+                    heap.push(next);
+                }
+            }
+        }
+        return res;
+    }
+};
