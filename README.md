@@ -1,7 +1,7 @@
-# 每天都在XJB写code
+# Just a recorcd of my daily routine
 
 
-## [自己XJB写的东西](XJBX)
+## [Some implement](XJBX)
 ---
 
 + [BloomFilter](XJBX/Bloomfilter)
