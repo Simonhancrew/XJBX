@@ -25,3 +25,23 @@ class Solution:
         res2 = rangeRob(nums,1,n-1)
 
         return max(res1,res2)
+
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 0: return 0
+        if n == 1: return nums[0]
+        if n == 2: return max(nums[1],nums[0])
+
+        old,now =0,nums[0]
+        for i in range(2,n):
+            t = now
+            now = max(now,old + nums[i - 1])
+            old = t
+        res = now
+        old,now = 0,nums[1]
+        for i in range(2,n):
+            t = now
+            now = max(now,old + nums[i])
+            old = t
+        return max(res,now)

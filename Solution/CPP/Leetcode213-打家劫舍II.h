@@ -61,3 +61,32 @@ public:
         return dp[end];
     }
 };
+
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+        if(!n) return 0;
+        if(n == 1) return nums[0];
+        if(n == 2) return max(nums[0],nums[1]);
+
+        //偷第一个
+        int old = 0;
+        int now = nums[0];
+        for(int i = 2;i < n;i++){
+            int t = now;
+            now = max(now,old + nums[i-1]);
+            old = t;
+        }
+        int res = now;
+        old = 0,now = nums[1];
+        for(int i = 2;i < n;i++){
+            int t = now;
+            //序列dp注意idx，这里其实往前推进了一位
+            now = max(now,old + nums[i]);
+            old = t;
+        }
+        return max(now,res);
+    }
+};

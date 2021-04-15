@@ -26,3 +26,32 @@ func rob(nums []int) int {
 
 	return max(res1, res2)
 }
+
+/*
+func rob(nums []int) int {
+    n:= len(nums)
+    if n == 0 {
+        return 0
+    }
+    if n == 1{
+        return nums[0]
+    }
+    if n == 2{
+        return max(nums[0],nums[1])
+    }
+    old,now := 0,nums[0]
+    for i:=2;i < n;i++{
+        t := now
+        now = max(now,old + nums[i - 1])
+        old = t
+    }
+    res := now
+    old,now = 0,nums[1]
+    for i := 2;i < n;i++{
+        t := now
+        now = max(now,old + nums[i])
+        old = t
+    }
+    return max(now,res)
+}
+*/
