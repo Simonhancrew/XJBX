@@ -113,3 +113,24 @@ public:
         return -1;
     }
 };
+
+//朴素双指针
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        if(!needle.size()) return 0;
+        int i,j;
+        for(i = 0, j = 0;i < haystack.size() && j < needle.size();i++){
+            if(haystack[i] == needle[j]){
+                j++;
+            }else{
+                i = i - j;
+                j = 0;
+            }
+        }
+        if(j < needle.size()){
+            return -1;
+        }
+        return i - needle.size();
+    }
+};
