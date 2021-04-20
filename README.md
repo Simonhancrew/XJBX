@@ -1,6 +1,3 @@
-# Just a recorcd of my daily routine
-
-
 ## [Some implement](XJBX)
 ---
 
