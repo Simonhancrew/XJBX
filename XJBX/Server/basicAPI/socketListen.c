@@ -50,7 +50,7 @@ int main(int argc,char *argv[]){
     struct sockaddr_in address;
     bzero(&address,sizeof address);
     address.sin_family = AF_INET;
-    inet_pton(AF_INET,ip,address.sin_addr);//present 2 number
+    inet_pton(AF_INET,ip,&address.sin_addr);//present 2 number
     address.sin_port = htons(port);//变网络序
 
     //命名socket，给他地址绑定
