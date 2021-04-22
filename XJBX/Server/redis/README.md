@@ -130,7 +130,7 @@ $ sudo tcpdump -i any dst host 127.0.0.1 and port 6379
 
 ## 二 基本数据结构
 
-### key
+### 2.1 key
 
 | set key value                        | 设置键值                                                     |
 | ------------------------------------ | :----------------------------------------------------------- |
@@ -151,7 +151,7 @@ $ sudo tcpdump -i any dst host 127.0.0.1 and port 6379
 | RENAMENX key newkey                  | 仅当 newkey  不存在时，将 key  改名为 newkey  。             |
 | TYPE key                             | 返回 key  所储存的值的类型                                   |
 
-### String
+### 2.2 String
 
 Redis 字符串数据类型的相关命令用于管理redis字符串值，基本语法如下
 
@@ -189,7 +189,7 @@ $ get han
 - MSET/MGET 命令可以有效地减少程序的网络通信次数，从而提高程序的执行效率
 - redis 用户可以定制命名格式来提升  redis 数据的可读性并避免键名冲突
 
-### hash散列表
+### 2.3 hash散列表
 
 Redis hash 是一个   string 类型的   field 和   value 的映射表，hash 特别适合用于存储对象。Re dis 中每个   hash 可以存储 2<sup>31</sup> - 1 键值对（40多亿）
 
@@ -245,7 +245,7 @@ $ hgetakk han
 3. 如果程序需要存储的数据项比较多，并且你希望尽可能地减少存储数据所需的内存，就应该优 先考虑使用散列键。
 4. 如果多个数据项在逻辑上属于同一组或者同一类，那么应该优先考虑使用散列键。
 
-### List
+### 2.4 List
 
 Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者 尾部（右边）一个列表最多可以包含    2<sup>32</sup> - 1  个元素    (4294967295,  每个列表超过  40 亿个元素)
 
@@ -287,7 +287,7 @@ $ lrange han 0 5
 + 先进先出队列,秒杀活动,把用户的购买操作全部放入队列
 + 分页
 
-### set集合(有点像unordered_set)
+### 2.5 set集合(有点像unordered_set)
 
 Redis 的Set  是    String  类型的无序集合。集合成员是唯一的，这就意味着集合中不能出现重复的数据.Redis  中集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1).集合中最大的成员数为2<sup>32</sup> - 1 (4294967295,  每个集合可存储  40 多亿个成员)。
 
@@ -324,7 +324,7 @@ $ smemvers ahan
 计算总数:SCARD users:count
 ```
 
-  ### soted set(有点像set)
+  ### 2.6 soted set(有点像set)
 
 Redis 有序集合和集合一样也是 string类型元素的集合,且不允许重复的成员。不同的是每个元素 都会关联一个 double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。 有序集合的成员是唯一的,但分数(score)却可以重复。集合是通过哈希表实现的,增删改查都是O(1).集合中最大的成员数为2<sup>32</sup> - 1 (4294967295,  每个集合可存储  40 多亿个成员)。
 
@@ -334,6 +334,177 @@ zadd hanhanhan 2 mongodb
 zrange hanhanhan 0 10
 1) "redis"
 2) "mongodb"
+```
+
+
+
+| 命令                                           | 描述                                                         |
+| ---------------------------------------------- | ------------------------------------------------------------ |
+| ZADD key score1 member1 [score2 member2]       | 向有序集合添加一个或多个成员，或者更新已存在成员的分数       |
+| ZCARD key                                      | 获取有序集合的成员数                                         |
+| ZCOUNT key min max                             | 计算在有序集合中指定区间分数的成员数                         |
+| ZINCRBY key increment member                   | 有序集合中对指定成员的分数加上增量 increment                 |
+| ZINTERSTORE destination numkeys key [key ...]  | 计算给定的一个或多个有序集的交集并将结果集存储在新的有序集合 key  中 |
+| ZLEXCOUNT key min max                          | 在有序集合中计算指定字典区间内成员数量                       |
+| ZRANGE key start stop [WITHSCORES]             | 通过索引区间返回有序集合成指定区间内的成员                   |
+| ZRANGEBYLEX key min max [LIMIT offset count]   | 通过字典区间返回有序集合的成员                               |
+| ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT] | 通过分数返回有序集合指定区间内的成员                         |
+| ZRANK key member                               | 返回有序集合中指定成员的索引                                 |
+| ZREM key member [member ...]                   | 移除有序集合中的一个或多个成员                               |
+| ZREMRANGEBYLEX key min max                     | 移除有序集合中给定的字典区间的所有成员                       |
+| ZREMRANGEBYRANK key start stop                 | 移除有序集合中给定的排名区间的所有成员                       |
+| ZREMRANGEBYSCORE key min max                   | 移除有序集合中给定的分数区间的所有成员                       |
+| ZREVRANGE key start stop [WITHSCORES]          | 返回有序集中指定区间内的成员，通过索引，分数从高到底         |
+| ZREVRANGEBYSCORE key max min [WITHSCORES]      | 返回有序集中指定分数区间内的成员，分数从高到低排序           |
+| ZREVRANK key member                            | 返回有序集合中指定成员的排名，有序集成员按分数值递减(从大到小)排序 |
+| ZSCORE key member                              | 返回有序集中，成员的分数值                                   |
+| ZUNIONSTORE destination numkeys key [key ...]  | 计算给定的一个或多个有序集的并集，并存储在新的 key  中       |
+| ZSCAN key cursor [MATCH pattern] [COUNT count] | 迭代有序集合中的元素（包括元素成员和元素分值）               |
+
+应用:
+
++ 排行榜
+
+```
+(1)  点击新闻（今天热搜） zincrby hotNews:20190802 1 NASA
+(2)  展示当日前 10
+zrevrange hotNews:20190802 0 9 WITHSCORES
+(3)  三天热搜榜单统计
+zunionstore hotNews:20190731-20190802 3 hotNews: 20190731 hotNews:20190801 hotNews:20190802 
+(4)  展示三天排行前 10
+zrevrange hotNews: 20190731-20190802 0 10 WITHSCORES
+```
+
++ 事件线
+
+## 三 操作命令
+
+### 3.1 hyperloglog
+
+Redis 在 2.8.9 版本添加了 HyperLogLog 结构。Redis HyperLogLog 是用来做基数统计的算法， HyperLogLog 的优点是，在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定 的并且是很小的。在 Redis 里面，每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接 近 2<sup>64</sup> 个不同元素的基数。这和计算基数时，元素越多耗费内存就越多的集合形成鲜明对比。但 是，因为 HyperLogLog 只会根据输入元素来计算基数，而不会储存输入元素本身，所以 HyperLog Log 不能像集合那样，返回输入的各个元素。
+
+| 命令                                      | 描述                                       |
+| ----------------------------------------- | ------------------------------------------ |
+| PFADD key element [element ...]           | 添加指定元素到 HyperLogLog  中。           |
+| PFCOUNT key [key ...]                     | 返回给定 HyperLogLog  的基数估算值。       |
+| PFMERGE destkey sourcekey [sourcekey ...] | 将多个 HyperLogLog  合并为一个 HyperLogLog |
+
+### 3.2 发布订阅
+
+Redis 发布订阅(pub/sub)是一种消息通信模式：发送者(pub)发送消息，订阅者(sub)接收消息。R edis 客户端可以订阅任意数量的频道。
+
+### 3.3 redis事务
+
+Redis 事务可以一次执行多个命令，   并且带有以下三个重要的保证： 
+
+1. 批量操作在发送   EXEC 命令前被放入队列缓存。
+2.  收到   EXEC 命令后进入事务执行，事务中任意命令执行失败，其余的命令依然被执行。 
+3. 在事务执行过程，其他客户端提交的命令请求不会插入到事务执行命令序列中。
+
+一个事务从开始到执行会经历以下三个阶段：
+
+1. 开始事务
+2. 命令入队。
+3. 执行事务。
+
+| 命令                | 描述                                                         |
+| ------------------- | ------------------------------------------------------------ |
+| DISCARD             | 取消事务，放弃执行事务块内的所有命令。                       |
+| EXEC                | 执行所有事务块内的命令。                                     |
+| MULTI               | 标记一个事务块的开始。                                       |
+| UNWATCH             | 取消 WATCH  命令对所有 key  的监视。                         |
+| WATCH key [key ...] | 监视一个(或多个) key  ，如果在事务执行之前这个(或这些) key  被其他命令所改动， 那么事务将被打断。 |
+
+因为事务在执行时会独占服务器，所以用户应该避免在事务中执行过多命令，更不要将一些需要进 行大量计算的命令放入事务中，以免造成服务器阻塞。
+
+## 四 C语言使用redis
+
+### 4.1 编译 hiredis
+
+```
+cd redis-6.0.3/deps/hiredis
+make
+sudo make install
+mkdir -p /usr/local/include/hiredis /usr/local/include/hiredis/adapters /usr/local/lib 
+cp -pPR hiredis.h async.h read.h sds.h /usr/local/include/hiredis
+cp -pPR adapters/*.h /usr/local/include/hiredis/adapters 
+cp -pPR libhiredis.so /usr/local/lib/libhiredis.so.0.14 
+cd /usr/local/lib && ln -sf libhiredis.so.0.14 libhiredis.so 
+cp -pPR libhiredis.a /usr/local/lib
+mkdir -p /usr/local/lib/pkgconfig
+cp -pPR hiredis.pc /usr/local/lib/pkgconfig
+```
+
+###  4.2连接redis
+
+ ```
+//连接Redis服务
+redisContext *context = redisConnect("127.0.0.1", 6379);
+    if (context == NULL || context->err) {
+        if (context) {
+           printf("%s\n", context->errstr);
+        } else {
+           printf("redisConnect error\n");
+        }
+        exit(EXIT_FAILURE);
+   }
+ ```
+
+### 4,3 授权auth
+
+```
+	redisReply *reply = redisCommand(context, "auth QAQ"); 
+	printf("type : %d\n", reply->type);
+	if (reply->type == REDIS_REPLY_STATUS) { 
+		/*SET str Hello World*/
+		printf("auth ok\n"); 
+	}
+	freeReplyObject(reply);
+```
+
+**void *redisCommand(redisContext *c, const char *format, ...);**
+
+这个函数是一个带有不定参数的。可以按着 format 格式给出对应的参数，这就和  printf 函数类似。 c  是一个  reidsConnect 函数返回的一个对象
+
+### 4.4 set/get/append
+
+```
+	char *key = "str";
+	char *val = "Hello World"; /*SET key value */
+	reply = redisCommand(context, "SET %s %s", key, val); 
+	printf("type : %d\n", reply->type);
+	if (reply->type == REDIS_REPLY_STATUS) { 
+		/*SET str Hello World*/
+		printf("SET %s %s\n", key, val); 
+	}
+	freeReplyObject(reply)
+```
+
+ ```
+// GET Key
+	reply = redisCommand(context, "GET %s", key); 
+	if (reply->type == REDIS_REPLY_STRING) {
+	/*GET str Hello World*/
+	printf("GET str %s\n", reply->str); /*GET len 11*/
+	printf("GET len %ld\n", reply->len); 
+	}
+	freeReplyObject(reply);
+ ```
+
+```
+// APPEND key value
+	char *append = " I am your GOD";
+	reply = redisCommand(context, "APPEND %s %s", key, append); 
+	if (reply->type == REDIS_REPLY_INTEGER) {
+		printf("APPEND %s %s \n", key, append); 
+	}
+	freeReplyObject(reply); /*GET key*/
+	reply = redisCommand(context, "GET %s", key); 
+	if (reply->type == REDIS_REPLY_STRING) {
+		//GET Hello World I am your GOD 
+		printf("GET %s\n", reply->str);
+	}
+	freeReplyObject(reply);
 ```
 
 
