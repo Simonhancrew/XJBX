@@ -18,6 +18,8 @@
     > [多路复用](XJBX/Server/IOMultiplexing)，从one io one thread开始到epoll到reactor
     
     > [basicAPI](XJBX/Server/basicAPI),简单的记录一下linux的相关网络处理函数和io函数
+
+    > [redis](XJBX/Server/redis/README.md),redis sample
 ## [Solution](Solution)
 
 > 大多数是Lc的题目，一般用C++,golang,python3实现，偶尔有rust。
