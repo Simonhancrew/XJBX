@@ -9,7 +9,7 @@
 
 + [SCL](XJBX/SCL)
 
-    > Standard Code Library。很重要的一些基础模板
+    > Standard Code Library。基础算法模板
 + [Morris遍历](XJBX/SCL/Graph/MorrisTraverse.hpp)
 
     >一种树的遍历算法，前中序很有趣，基本可以实现O(1)的额外空间复杂度。后序个人觉得没必要，因为有些操作感觉会引入一点额外的时间复杂度。主要是利用了叶子节点的空悬孩子的信息
