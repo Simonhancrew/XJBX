@@ -47,3 +47,22 @@ vector<int> midorder(TreeNode* root){
     }
     return res;
 }
+
+class Solution {
+public:
+    TreeNode* increasingBST(TreeNode* root) {
+        auto dummy = new TreeNode(-1);
+        tail = dummy;
+        dfs(root);
+        return dummy->right;
+    }
+    void dfs(TreeNode* root){
+        if(root == nullptr) return;
+        dfs(root->left);
+        //防空当前root的左节点
+        root->left = nullptr,tail->right = root;
+        tail = root;
+        dfs(root->right);
+    }
+    TreeNode* tail;
+};
