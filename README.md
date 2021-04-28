@@ -20,6 +20,8 @@
     > [basicAPI](XJBX/Server/basicAPI),简单的记录一下linux的相关网络处理函数和io函数
 
     > [redis](XJBX/Server/redis/README.md),redis sample
+
+    > [minigrep](XJBX/Server/minigrep/)，丐版grep(Rust)
 + [Linguistic Charactor](/XJBX/LingChar)
     > [左值和右值](/XJBX/LingChar/LRValue/README.md)，对于左值引用，move，右值引用的理解
 
