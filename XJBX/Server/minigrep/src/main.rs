@@ -4,10 +4,10 @@ use minigrep::*;
 
 
 fn main() {
-    let args:Vec<String> = env::args().collect();//无法处理非法unicode字符
+    //let args:Vec<String> = env::args().collect();//无法处理非法unicode字符
 
 
-    let config = Config::new(&args).unwrap_or_else(|err|{
+    let config = Config::new(env::args()).unwrap_or_else(|err|{
         eprintln!("parsing fails:{}",err);//标准错误
         process::exit(1)
     });

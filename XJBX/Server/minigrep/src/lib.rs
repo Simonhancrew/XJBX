@@ -22,37 +22,46 @@ pub struct Config{
 }
 
 impl  Config {
-    pub fn new(args:&[String])->Result<Config,&'static str>{
+    pub fn new(mut args:std::env::Args)->Result<Config,&'static str>{
         if args.len() < 3{
            return Err("not enough args");
         }
-        let  query = args[1].clone();
-        let filename = args[2].clone();
+        args.next();
+        let  query = match args.next(){
+            Some(arg) => arg,
+            None=>return Err("Didnt get a query"),
+        };
+        let filename = match args.next(){
+            Some(arg)=> arg,
+            None => return Err("didnt get a filename"),
+        };
         let case_sensitive = env::var("CASE_INSENSITIVE").is_err();//环境变量
         Ok(Config{query,filename,case_sensitive})
     }
 }
 
 
-pub fn search<'a> (query:&str,content:&'a str)->Vec<&'a str>{
-    let mut results = Vec::new();
-    for line in content.lines(){
-        if line.contains(query){
-            results.push(line);
-        }
-    }
-    results
+pub fn search<'a> (query:&str,contents:&'a str)->Vec<&'a str>{
+    // let mut results = Vec::new();
+    // for line in content.lines(){
+    //     if line.contains(query){
+    //         results.push(line);
+    //     }
+    // }
+    // results
+    contents.lines().filter(|line| line.contains(query)).collect() 
 }
 
-pub fn search_insensitive<'a> (query:&str,content:&'a str)->Vec<&'a str>{
-    let mut results = Vec::new();
-    let query = query.to_lowercase();
-    for line in content.lines(){
-        if line.to_lowercase().contains(&query){
-            results.push(line);
-        }
-    }
-    results
+pub fn search_insensitive<'a> (query:&str,contents:&'a str)->Vec<&'a str>{
+    // let mut results = Vec::new();
+    // let query = query.to_lowercase();
+    // for line in content.lines(){
+    //     if line.to_lowercase().contains(&query){
+    //         results.push(line);
+    //     }
+    // }
+    // results
+    contents.lines().filter(|line| line.to_lowercase().contains(&query.to_lowercase())).collect()
 }
 
 
