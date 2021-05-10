@@ -14,7 +14,7 @@ int n, m;
 int s[M];
 int son[N][2], cnt[N], idx;
 
-//
+//注意insert的操作，这里没有真的删除这个值，利用cnt数组做一个判断
 void insert(int x, int v)
 {
     int p = 0;
