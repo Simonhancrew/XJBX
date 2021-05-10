@@ -31,6 +31,5 @@
     > [递归的复杂度](/XJBX/LingChar/Recursion/recursion.h),递归的复杂度判断
     
     > [智能指针](XJBX/LingChar/smartPointer/README.md):智能指针
-## [Solution](Solution)
-
-> 大多数是Lc的题目，一般用C++,golang,python3实现，偶尔有rust。
++ [Solutions](/Solution/)
+    > contribute 365
