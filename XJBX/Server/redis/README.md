@@ -196,7 +196,7 @@ Redis hash 是一个   string 类型的   field 和   value 的映射表，hash 
 ```
 $ hmset han name "redis tutorial" likes 20 visitors 23000
 OK
-$ hgetakk han
+$ hgetall han
 1) "name"
 2) "redis tutorial"
 3) "likes"
@@ -293,7 +293,7 @@ Redis 的Set  是    String  类型的无序集合。集合成员是唯一的，
 
 ```
 $ sadd ahan redis
-$ smemvers ahan
+$ smembers ahan
 1) "redis"
 ```
 
