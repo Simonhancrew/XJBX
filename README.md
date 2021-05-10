@@ -12,7 +12,7 @@
     > Standard Code Library。基础算法模板
 + [Morris遍历](XJBX/SCL/Graph/MorrisTraverse.hpp)
 
-    >一种树的遍历算法，前中序很有趣，基本可以实现O(1)的额外空间复杂度。后序个人觉得没必要，因为有些操作感觉会引入一点额外的时间复杂度。主要是利用了叶子节点的空悬孩子的信息
+    > 一种树的遍历算法，前中序很有趣，基本可以实现O(1)的额外空间复杂度。后序个人觉得没必要，因为有些操作感觉会引入一点额外的时间复杂度。主要是利用了叶子节点的空悬孩子的信息
 
 + [Server](/XJBX/Server/)
     > [多路复用](XJBX/Server/IOMultiplexing)：从one io one thread开始到epoll到reactor
@@ -32,6 +32,7 @@
 
     > [智能指针](XJBX/LingChar/smartPointer/README.md):智能指针
 + [正则表达式记录](XJBX/Regexr/README.md)
+    > 正则的内容备忘
 
 + [Solutions](/Solution/)
     
