@@ -38,5 +38,5 @@
 
 ### [Solutions](/Solution/)
 
-contribute 365
+contribute 365，保持手感会每天写一点c++，rust，python3,golang的code
 
