@@ -1,0 +1,4 @@
+*.jpg
+*.png
+sub_files_dir/
+*.pgn
