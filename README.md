@@ -1,11 +1,10 @@
-## <center>[Routine](XJBX)</center>
 ### [SCL](XJBX/SCL)
-
+----
 
 基础算法和数据结构的模板.
 
 ### [Code and note](/XJBX/Server/)
-
+-----
 
 #### [BloomFilter](XJBX/Bloomfilter)
 
@@ -42,7 +41,7 @@
 > parse 一个文件的实例，解析pgn文件拿到落子信息
 
 ### [八股文 yes](/XJBX/LingChar)
-
+-------
 [左值和右值](/XJBX/LingChar/LRValue/README.md)，对于左值引用，move，右值引用的理解
 
 [递归的复杂度](/XJBX/LingChar/Recursion/recursion.h),递归的复杂度判断
@@ -50,6 +49,6 @@
 [智能指针](XJBX/LingChar/smartPointer/README.md):智能指针
 
 ### [contribute 365](/Solution/)
-
+------
 保持手感会每天写一点c++，rust，python3,golang的code
 
