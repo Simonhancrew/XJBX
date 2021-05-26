@@ -42,19 +42,98 @@ struct timeval{
 
 select成功的时候会返回就绪fd的数量，如果超时时间内没有任何的fd就绪，select会返回0。select失败的时候会返回-1，并设置errno。如果程序在select等待期间，接受到了信号，就会立即返回-1，errno被设置为EINTR。
 
+在哪些情况下，fd被认为是可读可写或者是出现异常，这对于select的使用是非常关键的。下列情况下，socket可读：
 
+1. socket内核接收缓冲区的字节数>=其低水位标记SO_RCVLOWAT。此时我们可以无阻塞的读。且返回的字节数大于0
+2. 通信的对方关闭连接。
+3. 监听的socket上有新的请求连接
+4. socket上有未处理的错误
 
+socket可写：
 
+1. 发送缓冲区的可用字节数大于等于其低水位标记SO_SNDLOWAT
+2. 写操作被关闭
+3. 使用非阻塞connect连接成功或者失败之后
+4. socket上有未处理的错误
 
+> [handleerror](./selectsample.c)
 
+### epoll
 
+epoll是linux特有的I/O复用函数，实现上和select有较大的差异。首先epoll使用一组函数来完成任务。其次，epoll把用户关心的fd放在内核的一个时间表里，从而无需想select那样需要每次都重复传fdset。但epoll需要一个额外fd，来唯一的标识内核中的这个时间表，这个fd由epoll_creat()创建。
 
+```
+#include <sys/epoll.h>
+int epoll_creat(int size);
+```
 
+size参数在目前最新的版本中并不起作用了，只给内核一个提示，告诉他时间表是要多大。函数返回的fd作为其他所有的epoll调用的第一个参数，指定要访问的内核时间表。下面的函数用来操作内核的时间表
 
+```
+#inlude <sys/epoll.h>
+int epoll_ctl(int epfd,int op,inr fd,struct epoll_event *event)
+```
 
+fd是要操作的文件描述符，op参数指定操作的类型，由如下的三种：
 
+1. EPOLL_CTL_ADD,往内核时间表注册fd上的时间
+2. EPOLL_CTL_MOD,修改fd上的注册事件
+3. EPOLL_CTL_DEL,删除fd上的注册事件
 
+event参数指定时间，他是epoll_event结构体型指针。
 
+```
+struct epoll_event{
+	__uint32_t events; //epoll事件
+	epoll_data_t data; //用户数据
+};
+```
+
+events描述的是事件类型，epoll数据可读就是 EPOLLIN,EPOLLOUT就是数据可写。其余的事件和poll的相似，但是有两个额外的事件类型，EPOLLLET和EPOLLONESHOT，他们对于epoll的高效运转非常的关键。data用作存储用户的数据：
+
+```
+typedef union epoll_data{
+	void *ptr;
+	int fd;
+	uint32_t u32;
+	uint64_t u64;
+}epoll_data_t;
+```
+
+因为是一个union，所以ptr和fd不能同时使用。
+
+**epoll_wait函数**
+
+在一段时间内等待一组文件描述符上的事件，原型：
+
+```
+#include <sys/epoll.h>
+int epoll_wait(int epfd,struct epoll_event* events,int maxevents,int timeout);
+```
+
+函数成功的时候返回就绪的fd数量，失败的时候返回-1，并设置errno。
+
+timeout参数设置超时值,-1的时候会一直阻塞，知道某个事件发生，maxevents指定最多监听多少个事件，必须大于0。epoll_wait函数如果检查到事件，就将所有的就绪的事件从内核表中复制到他的第二个参数events指向的数组结构体中。这个数组只用于输出epoll检测到的就绪事件，不同于select中的数组参数那样，既用于传入用户的注册事件，又用于传出内核检测到的就绪事件。
+
+```
+int ret = poll(fds,MAX_EVENT_NUMBER,-1);
+for(int i = 0;i < MAX_EVENT_NUMBER;i++){
+	if(fds[i].revents & POLLIN){
+		int socketfd = fds[i].fd; 
+	}
+}
+```
+
+epoll去索引返回的就绪文件fd就方便很多
+
+```
+int ret = epoll_wait(epfd,events,MAX_EVENT_NUMBER,-1);
+for(int i = 0;i < ret;i++){
+	int socketfd = events[i];//肯定是就绪的，直接处理
+}
+```
+
+**ET和LT模式**
 
 
 
