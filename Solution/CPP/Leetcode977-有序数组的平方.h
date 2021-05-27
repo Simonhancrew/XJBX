@@ -52,3 +52,19 @@ public:
         return ans;
     }
 };
+
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+        int i = 0, j = nums.size() - 1;
+        vector<int> ans(nums.size());
+        int k = ans.size() - 1;
+        while(i <= j){
+            int lm = nums[i] * nums[i];
+            int rm = nums[j] * nums[j];
+            if(lm > rm) ans[k--] = lm,i++;
+            else ans[k--] = rm,j--;
+        }
+        return ans;
+    }
+};
