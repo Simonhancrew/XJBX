@@ -13,4 +13,4 @@
 - n≤1e9=>O(n)，判断质数
 - n≤1e18 =>O(logn)，最大公约数，快速幂
 - n≤1e1000 =>O((logn)<sup>2</sup>)，高精度加减乘除
-- n≤1e100000 => O(logk×loglogk)，k表示位数O(logk×loglogk)，k表示位数，高精度加减、FFT/NTT
+- n≤1e100000 => O(logk×loglogk)，k表示位数，高精度加减、FFT/NTT
