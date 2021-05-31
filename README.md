@@ -50,7 +50,7 @@ parse 一个文件的实例，解析pgn文件拿到落子信息
 #### [智能指针](XJBX/LingChar/smartPointer/README.md)
 智能指针
 
-#### [posix多线程编程](XJBX\Server\PosixThreadsProgramming\README.md)
+#### [posix多线程编程](XJBX/Server/PosixThreadsProgramming/README.md)
 posix多线程编程的翻译
 
 ## [contribute 365](/Solution/)
