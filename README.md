@@ -1,4 +1,4 @@
-# Recipe:每天给自己上一道菜
+# Recipe:to strive for greatness
 
 ## Basic Algorithm
 
@@ -58,6 +58,8 @@
    
 2. 动手实现一个数据库？ 
 
+3. 高性能mysql详解
+
 ## 炼丹从入门到放弃
 
 1. what is attention
@@ -81,7 +83,12 @@
 
 ## 设计模式
 
-1. 23个涉及模式
+1. 23个设计模式
+
+## 编译原理
+
+1. 现代编译原理
+2. 链接、装载与库
 
 ## Contribute 365
 
