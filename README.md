@@ -1,58 +1,103 @@
-# Some recipes
+# Recipe:每天给自己上一道菜
 
-## [SCL](XJBX/SCL)
+## Basic Algorithm
 
-基础算法和数据结构的模板.
+1. [SCL](XJBX/SCL):
 
-## [BloomFilter](XJBX/Bloomfilter)
+   > 基础算法模板，大部分使用C++实现。其中编译器要符合C01标准。
 
-一个参考Cassandra中的BloomFilter实现，Hash选用MurmurHash2，通过双重散列公式生成散列函数
+2. [BloomFilter](XJBX/Bloomfilter)：
 
-参考：http://hur.st/bloomfilter
+   > 一个参考Cassandra中的BloomFilter实现，Hash选用MurmurHash2，通过双重散列公式生成散列函数参考：http://hur.st/bloomfilter
 
-## [多路复用](XJBX/Server/IOMultiplexing)：
+3. [Consistent Hasing](XJBX/Server/consistentHashing/README.md):
 
-从one io one thread开始到epoll到reactor
+   > 一致哈希的理解和实现
 
-## [basicAPI](XJBX/Server/basicAPI)：
+## Linux高性能服务器
 
-简单的记录一下linux的相关网络处理函数和io函数
+1. [Basic API](XJBX/Server/basicAPI):
 
-## [redis](XJBX/Server/redis/README.md)：
+   > something about connect,recv,listen,bind,etc.
 
-redis sample
+2. [IO multiplexing](XJBX/Server/IOMultiplexing):
 
-## [minigrep](XJBX/Server/minigrep/)：
+   > select + epoll + reactor
 
-rust实现的一个grep，有些许丐版
+3. [协程]()
 
-## [协程](XJBX/Server/Coroutine)：
+   > 用户态线程，切换采用汇编实现，只符合x86 cpu构架
 
-协程的实现（用户态线程）
+4. [minigrep](XJBX/Server/minigrep/):
 
-## [一致性哈希算法](XJBX/Server/consistentHashing/README.md):
+   > 如何用rust实现一个grep？
 
-对于一致哈希算法的理解和记录
+## 语言特性
 
-## [正则表达式](XJBX/Regexr/README.md): 
+1. [左值和右值](/XJBX/LingChar/LRValue/README.md):
 
-parse 一个文件的实例，解析pgn文件拿到落子信息
+   > 函数构造学
 
-## [八股文 yes](/XJBX/LingChar)
-#### [左值和右值](/XJBX/LingChar/LRValue/README.md)
+2. [递归的复杂度](/XJBX/LingChar/Recursion/recursion.h):
 
-对于左值引用，move，右值引用的理解
+   > 多情况下的复杂度判断
 
-#### [递归的复杂度](/XJBX/LingChar/Recursion/recursion.h)
+3. [智能指针](XJBX/LingChar/smartPointer/README.md):
 
-递归的复杂度判断
+   > C++11特性
 
-#### [智能指针](XJBX/LingChar/smartPointer/README.md)
-智能指针
+4. [正则](XJBX/Regexr/README.md):
 
-#### [posix多线程编程](XJBX/Server/PosixThreadsProgramming/README.md)
-posix多线程编程的翻译
+   > 最全re记录，反正我会了，然后parse了一个pgn file作为例子
 
-## [contribute 365](/Solution/)
-保持手感会每天写一点c++，rust，python3,golang的code
+## 数据库
+
+1. [Redis sample](XJBX/Server/redis/README.md):
+
+   > Redis从编译到放弃 + 使用场景分析
+   
+2. 动手实现一个数据库？ 
+
+## 炼丹从入门到放弃
+
+1. what is attention
+2. transformer
+3. vit
+4. xxxx：行人属性检测的
+
+## Operating System
+
+1. 虚拟化
+2. 并发
+3. 持久化
+
+## 多线程
+
+1. [Posix多线程编程翻译](XJBX/Server/PosixThreadsProgramming/README.md)
+
+## 计网
+
+1. 用户态协议栈的设计和C10M的研究
+
+## 设计模式
+
+1. 23个涉及模式
+
+## Contribute 365
+
+每天[C++](/Solution/)，[Rust](/Solution/)，[Golang](/Solution/)，[Python3](/Solution/)的手感保持
+
+## 效率工具
+
+1. git详解
+2. vim
+3. valgrind
+4. gdb
+5. cmake
+
+## 项目
+
+1. 分布式私有云
+2. ahanDB
+3. LeptServer
 
