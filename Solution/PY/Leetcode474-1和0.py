@@ -22,3 +22,19 @@ class Solution:
                     dp[i][j] = max(dp[i][j], dp[i - num0][j - num1] + 1)
 
         return dp[m][n]
+
+# 去点idx的维度优化
+# class Solution:
+#     def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
+#         dp = [[0] * (n + 1) for _ in range(m + 1)]
+#         for s in strs:
+#             cn,cm = 0,0
+#             for ch in s:
+#                 if ch == '0':
+#                     cm +=1
+#                 else:
+#                     cn += 1
+#             for i in range(m,cm-1,-1):
+#                 for j in range(n,cn - 1,-1):
+#                     dp[i][j] = max(dp[i][j],dp[i - cm][j - cn] + 1)
+#         return dp[m][n]

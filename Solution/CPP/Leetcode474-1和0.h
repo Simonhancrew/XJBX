@@ -97,3 +97,27 @@ public:
         return dp[now][m][n];
     }
 };
+
+
+//借鉴一维背包的空间优化，逆序。
+class Solution {
+public:
+    int findMaxForm(vector<string>& strs, int m, int n) {
+        int length = strs.size();
+        int dp[n + 1][m + 1];
+        memset(dp,0,sizeof dp);
+        for(int i = 1;i <= length;i++){
+            int cm = 0,cn = 0;  //0,1个数
+            for(auto &ch:strs[i - 1]){
+                if(ch == '0') cm++;
+                else cn++;
+            }
+            for(int j = n;j >= cn;j--){
+                for(int k = m;k >= cm;k--){
+                    dp[j][k] = max(dp[j][k],dp[j - cn][k - cm] + 1);
+                }
+            }
+        }
+        return dp[n][m];
+    }
+};
