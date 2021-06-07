@@ -1,19 +1,27 @@
 from typing import List
 class Solution:
-    def findTargetSumWays(self, nums: List[int], S: int) -> int:    
-        sum = 0
-        n = len(nums)
-        for num in nums:
-            sum += num
-        if S > sum:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        Sum = sum(nums)
+        if Sum < target or (Sum + target) & 1 == 1:
             return 0
-        if (S + sum) % 2 == 1:
-            return 0
-        val = (S + sum) // 2 
-        dp = [0] * (val + 1) 
+        pos = (Sum + target) >> 1
+        dp = [0] *(pos + 1)
         dp[0] = 1
-        for i in range(n):
-            #左闭右开，注意方向
-            for j in range(val,nums[i] - 1,-1):
+        for i in range(len(nums)):
+            for j in range(pos,nums[i] - 1,-1):
                 dp[j] += dp[j - nums[i]]
-        return dp[val]
+        return dp[pos]
+
+# class Solution:
+#     def __init__(self):
+#         self.cnt = 0
+#     def findTargetSumWays(self, nums: List[int], target: int) -> int:
+#         def dfs(nums,target,sum,idx):
+#             if idx == len(nums):
+#                 if sum == target:
+#                     self.cnt += 1
+#             else:
+#                 dfs(nums,target,sum + nums[idx],idx + 1)
+#                 dfs(nums,target,sum - nums[idx],idx + 1)
+#         dfs(nums,target,0,0)
+#         return self.cnt

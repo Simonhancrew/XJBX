@@ -31,3 +31,44 @@ public:
         return dp[bagSize];
     }
 };
+
+#include <numeric>
+class Solution {
+public:
+    int findTargetSumWays(vector<int>& nums, int target) {
+        int sum = accumulate(nums.begin(),nums.end(),0);
+        if(target > sum) return 0;
+        if((sum + target) & 1) return 0;
+        int pos = (sum + target) >> 1;
+        int dp[pos + 1];
+        memset(dp,0,sizeof dp);
+        dp[0] = 1;
+        for(int i = 0;i < nums.size();i++){
+            for(int j = pos;j >= nums[i];j--){
+                dp[j] += dp[j - nums[i]];
+            }
+        }
+        return dp[pos];
+    }
+};
+
+class Solution {
+public:
+    int cnt = 0;
+    int target;
+    int findTargetSumWays(vector<int>& nums, int target) {
+        this -> target = target;
+        dfs(nums,0,0);
+        return cnt;
+    }
+    void dfs(vector<int>& nums,int idx,int sum){
+        if(idx == nums.size()){
+            if(sum == target){
+                cnt++;
+            }
+            return;
+        }
+        dfs(nums,idx + 1,sum + nums[idx]);
+        dfs(nums,idx + 1,sum - nums[idx]);
+    }
+};
