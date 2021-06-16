@@ -1,5 +1,4 @@
-# Recipe:to strive for greatness
-
+# Recipe:stay humble
 ## Basic Algorithm
 
 1. [SCL](XJBX/SCL):
