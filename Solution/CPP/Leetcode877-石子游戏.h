@@ -20,16 +20,3 @@ public:
     }
 };
 
-
-// 博弈论
-class Solution {
-public:
-    bool stoneGame(vector<int>& piles) {
-        int res = piles[0],n = piles.size();
-        for(int i = 1;i < n;i++){
-            res ^= piles[i];
-        }
-        if(res == 0) return false;
-        return true;
-    }
-};
