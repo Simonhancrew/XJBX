@@ -38,3 +38,23 @@ class Solution2 {
         return dp[0][n-1]>=0;
     }
 };
+#include <numeric>
+class Solution {
+public:
+    bool PredictTheWinner(vector<int>& nums) {
+        int n = nums.size();
+        int sum = accumulate(nums.begin(),nums.end(),0);
+        int dp[n][n];
+        for(int len = 1;len <= n;len++){
+            for(int i = 0;i + len - 1 < n;i++){
+                int j = i + len - 1;
+                if(i == j) dp[i][j] = nums[i];
+                else{
+                    dp[i][j] = max(nums[i] - dp[i + 1][j],nums[j] - dp[i][j - 1]);
+                }
+            }
+        }
+        if(dp[0][n - 1] >= 0) return true;
+        return false; 
+    }
+};
