@@ -51,13 +51,17 @@
 
 ## 数据库
 
-1. [Redis sample](XJBX/Server/redis/README.md):
+1. [Redis sample](XJBX/Server/redis/HowtoUse/README.md):
 
    > Redis从编译到放弃 + 使用场景分析,另外在在算法模板中实现了[跳表](/XJBX/SCL/Datastruct/)
    
-2. 动手实现一个数据库？ 
+2. [Redis SourceCode](./XJBX/Server/redis/SourceCodeStudy/README.md)
 
-3. 高性能mysql详解
+   > 源码的注释和理解
+
+3. 动手实现一个数据库？ 
+
+4. 高性能mysql详解
 
 ## 炼丹从入门到放弃
 
