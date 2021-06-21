@@ -59,6 +59,57 @@ struct ngx_pool_s {
 >
 > `callbacklog`：日志信息
 
+## 一些相关函数的简介
+
++ `ngx_alloc`：（只是对`malloc`进行了简单的封装）
+
+  ```
+  void *ngx_alloc(size_t size, ngx_log_t *log)
+  {
+   	void  *p;
+   	p = malloc(size);
+      if (p == NULL) {
+           ngx_log_error(NGX_LOG_EMERG, log, ngx_errno,"malloc(%uz) failed", size);
+      }
+      ngx_log_debug2(NGX_LOG_DEBUG_ALLOC, log, 0, "malloc: %p:%uz", p, size);
+      return p;
+  }
+  ```
+
++ `ngx_calloc`（调用`malloc`并初始化为0）
+
+  ```
+   void *ngx_calloc(size_t size, ngx_log_t *log)
+  {
+  	void  *p;
+      p = ngx_alloc(size, log);
+      if (p) {
+      	ngx_memzero(p, size);
+      }
+      return p;
+  }
+  ```
+
++ `ngx_memzero`
+
+  ```
+  #define ngx_memzero(buf, n)       (void) memset(buf, 0, n)
+  ```
+
++ `ngx_free` ：
+
+  ```
+  #define ngx_free          free
+  ```
+
++ `ngx_memalign`：
+
+  ```
+  #define ngx_memalign(alignment, size, log)  ngx_alloc(size, log)
+  ```
+
+  这里alignment主要是针对部分`unix`平台需要动态的对齐，对`POSIX 1003.1d`提供的`posix_memalign( )`进行封装，在大多数情况下，编译器和C库透明地帮你处理对齐问题。`nginx`中通过宏`NGX_HAVE_POSIX_MEMALIGN`来控制；
+
 ## 创建等基本操作
 
 | operation          | Routine                                                      |
@@ -124,7 +175,7 @@ void *ngx_palloc(ngx_pool_t *pool, size_t size)
  
 		 } while (p);
 
-			return ngx_palloc_block(pool, size);
+		return ngx_palloc_block(pool, size);
 	}
 	return ngx_palloc_large(pool, size);
 }
@@ -191,11 +242,24 @@ void *ngx_palloc(ngx_pool_t *pool, size_t size)
     	n = 0;
     	// 查找到一个空的large区，如果有，则将刚才分配的空间交由它管理
     	for (large = pool->large; large; large = large->next) {
-    	if (large->alloc == NULL) {
-    		large->alloc = p;
-    		return p;
-    	}
-    	if (n++ > 3) break;
+    		if (large->alloc == NULL) {
+    			large->alloc = p;
+    			return p;
+    		}
+    		if (n++ > 3) break;
+   	 }
+   	
+   	large = ngx_palloc(pool, sizeof(ngx_pool_large_t));
+   	if (large == NULL) {
+   		ngx_free(p);
+   		return NULL;
+       }
+       
+       large->alloc = p;
+       large->next = pool->large;
+   	pool->large = large;
+       return p;
+   }
    ```
 
 4. 内存清理
