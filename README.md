@@ -61,8 +61,8 @@
 
 3. 动手实现一个数据库？ 
 
-4. 高性能mysql详解
-
+4. [高性能mysql详解](XJBX/Server/Mysql/README.md)
+   > ^_^
 ## 炼丹从入门到放弃
 
 1. what is attention
