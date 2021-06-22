@@ -31,3 +31,31 @@ private:
         }
     }
 };
+
+
+class Solution {
+public:
+    vector<vector<int>> ans;
+    vector<int> path;
+    vector<bool> st;
+    vector<vector<int>> permute(vector<int>& nums) {
+        st.resize(nums.size(),false);
+        path.resize(nums.size(),0);
+        dfs(nums,0);    
+        return ans;
+    }
+    void dfs(vector<int>& nums,int idx){
+        if(idx == nums.size()){
+            ans.push_back(path);
+            return;
+        }
+        for(int i = 0;i < nums.size();i++){
+            if(!st[i]){
+                st[i] = true;
+                path[idx] = nums[i];
+                dfs(nums,idx + 1);
+                st[i] = false;
+            }
+        }
+    }
+};
