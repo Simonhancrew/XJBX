@@ -48,6 +48,14 @@
 4. [正则](XJBX/Regexr/README.md):
 
    > 最全re记录，反正我会了，然后parse了一个pgn file作为例子
+   
+5. 内存管理
+
+   > [new/delete/operator new/placement new](XJBX/LingChar/MemManagement/new++.md):内存分配cheatsheet
+   >
+   > [malloc](XJBX/LingChar/MemManagement/About_malloc.md)：阅读华庭的malloc书籍备忘
+   >
+   > [malloc.c](XJBX/LingChar/MemManagement/Code/shmalloc.c)：a init version of malloc
 
 ## 数据库
 
@@ -62,6 +70,7 @@
 3. 动手实现一个数据库？ 
 
 4. [高性能mysql详解](XJBX/Server/Mysql/README.md)
+   
    > ^_^
 ## 炼丹从入门到放弃
 
