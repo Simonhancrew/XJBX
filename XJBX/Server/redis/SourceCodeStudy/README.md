@@ -44,7 +44,7 @@
 | `replication.c`                                              | 复制功能的实现。                                             |
 | `rio.c` 、 `rio.h`                                           | Redis 对文件 I/O 函数的包装， 在普通 I/O 函数的基础上增加了显式缓存、以及计算校验和等功能。 |
 | `scripting.c`                                                | 脚本功能的实现。                                             |
-| `sds.c` 、 `sds.h`                                           | SDS 数据结构的实现，SDS 为 Redis 的默认字符串表示。          |
+| [`sds.c`](./src/sds.c) 、[`sds.h`](./src/sds.h)              | SDS 数据结构的实现，SDS 为 Redis 的默认字符串表示。[柔性数组](./SDS.md)用在了sds的结构体定义中 |
 | `sentinel.c`                                                 | Redis Sentinel 的实现。                                      |
 | `setproctitle.c`                                             | 进程环境设置函数。                                           |
 | `sha1.c` 、 `sha1.h`                                         | SHA1 校验和计算函数。                                        |
