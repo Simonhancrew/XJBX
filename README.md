@@ -5,21 +5,21 @@
 
    > 基础算法模板，大部分使用C++实现。其中编译器要符合C01标准。
 
-2. [BloomFilter](XJBX/Bloomfilter)：
+2. [BloomFilter](XJBX/Project/Bloomfilter)：
 
    > 一个参考Cassandra中的BloomFilter实现，Hash选用MurmurHash2，通过双重散列公式生成散列函数参考：http://hur.st/bloomfilter
 
-3. [Consistent Hasing](XJBX/Server/consistentHashing/README.md):
+3. [Consistent Hasing](XJBX/Server/MiddleWare/consistentHashing/README.md):
 
    > 一致哈希的理解和实现
 
 ## Linux高性能服务器
 
-1. [Basic API](XJBX/Server/basicAPI):
+1. [Basic API](XJBX/Server/ComputerNetwork/basicAPI):
 
    > something about connect,recv,listen,bind,etc.
 
-2. [IO multiplexing](XJBX/Server/IOMultiplexing):
+2. [IO multiplexing](XJBX/Server/ComputerNetwork/IOMultiplexing):
 
    > select + epoll + reactor
 
@@ -27,7 +27,7 @@
 
    > 用户态线程，切换采用汇编实现，只符合x86 cpu构架
 
-4. [minigrep](XJBX/Server/minigrep/):
+4. [minigrep](XJBX/Server/OS/minigrep/):
 
    > 如何用rust实现一个grep？
 
@@ -45,7 +45,7 @@
 
    > C++11特性
 
-4. [正则](XJBX/Regexr/README.md):
+4. [正则](XJBX/LingChar/Regexr/README.md):
 
    > 最全re记录，反正我会了，然后parse了一个pgn file作为例子
    
@@ -59,17 +59,17 @@
 
 ## 数据库
 
-1. [Redis sample](XJBX/Server/redis/HowtoUse/README.md):
+1. [Redis sample](XJBX/Server/DB/redis/HowtoUse/README.md):
 
    > Redis从编译到放弃 + 使用场景分析,另外在在算法模板中实现了[跳表](/XJBX/SCL/Datastruct/)
    
-2. [Redis SourceCode](./XJBX/Server/redis/SourceCodeStudy/README.md)
+2. [Redis SourceCode](./XJBX/Server/DB/redis/SourceCodeStudy/README.md)
 
    > 源码的注释和理解
 
 3. 动手实现一个数据库？ 
 
-4. [高性能mysql详解](XJBX/Server/Mysql/README.md)
+4. [高性能mysql详解](XJBX/Server/DB/Mysql/README.md)
    
    > ^_^
 ## 炼丹从入门到放弃
@@ -87,7 +87,7 @@
 
 ## 多线程
 
-1. [Posix多线程编程翻译](XJBX/Server/PosixThreadsProgramming/README.md)
+1. [Posix多线程编程翻译](XJBX/Server/OS/PosixThreadsProgramming/README.md)
 
 ## 计网
 
