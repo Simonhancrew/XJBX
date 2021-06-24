@@ -15,7 +15,7 @@
 | `crc16.c` 、 `crc64.c` 、 `crc64.h`                          | 计算 CRC 校验和。                                            |
 | `db.c`                                                       | 数据库实现。                                                 |
 | `debug.c`                                                    | 调试实现。                                                   |
-| `dict.c` 、 `dict.h`                                         | 字典数据结构的实现。                                         |
+| [`dict.c`](./src/dict.c) 、 [`dict.h`](./src/dict.h)         | [字典](./Dict.md)数据结构的实现。                            |
 | `endianconv.c` 、 `endianconv.h`                             | 二进制的大端、小端转换函数。                                 |
 | `fmacros.h`                                                  | 一些移植性方面的宏。                                         |
 | `help.h`                                                     | `utils/generate-command-help.rb` 程序自动生成的命令帮助信息。 |
