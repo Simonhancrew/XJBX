@@ -4,6 +4,11 @@
 
 using namespace std;
 
+// BFS构建图的思路：首先遍历一下，找到起点的路线，将这个距离设置为1，然后队列中加入这条路线。
+// 还要维护一个点的信息，看看每个点上挂了那几条路线。之后就可以根据路线 -> 点 -> 路线的思路去宽搜了
+// 之后BFS这个路线，只要路线的距离更小，就更新他（代表的是做了几条公交），然后在点的信息中删除这个点,代表以后我一定不走回头路.
+// 加速bfs
+
 class Solution {
 public:
     int numBusesToDestination(vector<vector<int>>& routes, int source, int target) {
