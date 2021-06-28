@@ -112,8 +112,8 @@
 
 1. git详解
 2. vim
-3. valgrind
-4. gdb
+3. [valgrind](XJBX/Server/Tools/Valgrind/README.md)
+4. [gdb](XJBX/Server/Tools/GDB/README.md)
 5. cmake
 
 ## 项目
