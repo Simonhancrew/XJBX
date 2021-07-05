@@ -58,3 +58,42 @@ public:
         return res;
     }
 };
+
+#include <stack>
+class Solution {
+public:
+    string countOfAtoms(string formula) {
+        map<string,int> ans;
+        int n = formula.size(),cnt = 1;
+        string d,res;
+        stack<int> stk;
+        string s;
+        for(int i = n - 1;i >= 0;i--){
+            if(isdigit(formula[i])){
+                d = formula[i] + d;
+            }else if(formula[i] == ')'){
+                int num = d == ""?1:stoi(d);
+                d = "";
+                cnt *= num;
+                stk.push(num);
+            }
+            else if(formula[i] == '('){
+                cnt /= stk.top();
+                stk.pop();
+            }else{
+                s += formula[i];
+                if(formula[i] >= 'A' && formula[i] <= 'Z'){
+                    reverse(s.begin(),s.end());
+                    ans[s] += (d==""?1:stoi(d)) * cnt;
+                    d = "";
+                    s = "";
+                } 
+            }
+        }
+        for(auto& [x,y]:ans){
+            res += x;
+            if(y > 1) res += to_string(y);
+        }
+        return res;
+    }
+};
