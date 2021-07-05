@@ -1,8 +1,10 @@
 #include <iostream>
 
 using namespace std;
-//维护一个额外信息的并查集
-//https://www.acwing.com/problem/content/242/
+
+// 维护一个额外信息的并查集，带权并查集
+// https://www.acwing.com/problem/content/242/
+// 注意d可能是复数，所以需要维护的是距离的差距的模（可以考虑做一个取模的操作，令M = 3）
 
 const int N = 5e5 + 10;
 int p[N],d[N];
@@ -48,7 +50,7 @@ int main(){
                     //不在一个集合，更新一下吃的关系
                     p[px] = py;
                     //x到跟应该比y到根大1
-                    d[px] = d[y] + 1 -d[x];
+                    d[px] = d[y] + 1 -d[x];// d[p2] = ((d[x] - d[y]) + M) % M;   
                 }
             }
         }
