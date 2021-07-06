@@ -1,8 +1,12 @@
 #include <iostream>
 #include <cstring>
+
+// 要求权重必须是1
+
 //BFS处理无权最段路的问题
 //BFS按照层级数序遍历一个图，如果可能出现闭环的话需要标记搜索过的点位。
 //基于这个性质可以按照层序去遍历到最短的距离
+
 using namespace std;
 
 typedef pair<int,int> PII;
