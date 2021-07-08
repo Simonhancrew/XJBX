@@ -22,88 +22,89 @@ mysql中记录了用户信息和用户的文件信息，fastdfs中进行文件�
 
 接口文档在同目录下的API文档中
 
-### 如何设计数据表和我的思路
+### 如何设计数据表和我的思路以及业务分析
 
-首先给出设计的数据库表
+首先给出设计的数据库表：[link](LeptCloud.sql)
 
-```
-#数据库表
-#创建数据库
-DROP database IF EXISTS `LEPTCLOUD_disk`;
-CREATE DATABASE `LEPTCLOUD_disk`;
+数据表比较繁杂，这里我站在高处点一下全部的过程，而且这些表的设计是为了业务流程服务的。下载是用md5来唯一请求到url的。
 
-#使用数据库
-use `LEPTCLOUD_disk`;
-
-
-DROP TABLE IF EXISTS `file_info`;
-CREATE TABLE `file_info` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '文件序号，自动递增，主键',
-  `md5` varchar(256) NOT NULL COMMENT '文件md5',
-  `file_id` varchar(256) NOT NULL COMMENT '文件id:/group1/M00/00/00/xxx.png',
-  `url` varchar(512) NOT NULL COMMENT '文件url 192.168.52.139:80/group1/M00/00/00/xxx.png',
-  `size` bigint(20) DEFAULT '0' COMMENT '文件大小, 以字节为单位',
-  `type` varchar(32) DEFAULT '' COMMENT '文件类型： png, zip, mp4……',
-  `count` int(11) DEFAULT '0' COMMENT '文件引用计数,默认为1。每增加一个用户拥有此文件，此计数器+1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8 COMMENT='文件信息表';
-
-
-DROP TABLE IF EXISTS `share_file_list`;
-CREATE TABLE `share_file_list` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `user` varchar(32) NOT NULL COMMENT '文件所属用户',
-  `md5` varchar(256) NOT NULL COMMENT '文件md5',
-  `file_name` varchar(128) DEFAULT NULL COMMENT '文件名字',
-  `pv` int(11) DEFAULT '1' COMMENT '文件下载量，默认值为1，下载一次加1',
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '文件共享时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='共享文件列表';
-
-
-DROP TABLE IF EXISTS `user_file_count`;
-CREATE TABLE `user_file_count` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user` varchar(128) NOT NULL COMMENT '文件所属用户',
-  `count` int(11) DEFAULT NULL COMMENT '拥有文件的数量',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `user_UNIQUE` (`user`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户文件数量表';
-
-
-DROP TABLE IF EXISTS `user_file_list`;
-CREATE TABLE `user_file_list` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `user` varchar(32) NOT NULL COMMENT '文件所属用户',
-  `md5` varchar(256) NOT NULL COMMENT '文件md5',
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '文件创建时间',
-  `file_name` varchar(128) DEFAULT NULL COMMENT '文件名字',
-  `shared_status` int(11) DEFAULT NULL COMMENT '共享状态, 0为没有共享， 1为共享',
-  `pv` int(11) DEFAULT NULL COMMENT '文件下载量，默认值为0，下载一次加1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='用户文件列表';
-
-
-DROP TABLE IF EXISTS `user_info`;
-CREATE TABLE `user_info` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户序号，自动递增，主键',
-  `user_name` varchar(32) NOT NULL DEFAULT '' COMMENT '用户名称',
-  `nick_name` varchar(32) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '用户昵称',
-  `password` varchar(32) NOT NULL DEFAULT '' COMMENT '密码',
-  `phone` varchar(16) NOT NULL DEFAULT '' COMMENT '手机号码',
-  `email` varchar(64) DEFAULT '' COMMENT '邮箱',
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '时间',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uq_nick_name` (`nick_name`),
-  UNIQUE KEY `uq_user_name` (`user_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
-```
+![2](./pic/2.png)
 
 
 
-### 分布式文件系统详解
+首先，file_info表是描述一个文件储存的，他有如下的参数：
 
- 
+1. md5：文件的  md5 值，文件上传先可以先匹对数据库是否存在相同的 md5 值，如果存在意味着是同一文件。
+2. file_id：文件  id，对应  fastdfs 的文件路径，下载的时候请求会打到这个路径
+3. url：文件的完整存储路径，比如  192.168.52.139:80/group1/M00/00/00/xxx.png
+4. count：文件引用计数，每增加一个用户拥有此文件，此计数器+1
+
+之后还有一个共享表，表中维护一下几个字段：
+
+1. user：文件所属用户
+2. md5：对应的 md5 值
+3. file_name：文件名
+4. pv：文件下载量，方便按照下载量排序
+
+登录的时候主要用到user_info表去查询：
+
+1. user_name：用户名，唯一
+2. password：密码，md5 加密
+
+-------------
+
+接下来简单的分析一下业务的实现，首先是注册，详细看代码reg_cgi.c,里面的流程主要：
+
+1. post注册信息（client）
+2. 查mysql，成功回复json数据
+
+在这个过程中，密码是用md5加密过的，储存在数据库中的也是加密过的密码。
+
+之后就是登录的功能，在login_cgi.c中实现：
+
+1. post相关信息，mysql验证
+2. 生成token，并在回复中附上token
+
+关于token的作用，我在这里做一个密钥类似的作用，做一个身份验证的功能。这样在服务端就不用做我的身份登录的记录（注意我设置了token的实现时长，setex），我在此简要描述一下带token的服务端验证：
+
+1. 客户端每次向服务端请求的时候需要带着token
+2. 服务端收到请求，去验证token，如果验证一致，返回请求的数据。
+
+注意看到login中，我过了一步base64，主要是为了处理编码的问题，有些不可见字符可能会出现被误处理的问题。
+
+再就是文件上传的流程：
+
+1. 每个文件都有唯一的md5值，就像身份证号一样。client在上传文件之前将md5传到服务器上与之一起的还post一个token，做验证用
+2. 服务器判断是否有这个，有的话在file_info表中将cnt++
+3. 反之就需要上传了
+
+还有就是获取文件列表：
+
+1. 首先会请求到文件数目
+2. 之后再post我的文件列表起点和count，去请求文件列表
+
+分享文件流程：
+
+1. 要在share表中看看有没有share过，有的话 + 1没有的话分享
+
+2. 获取分享文件和获取文件列表类似
+
+处理文件：
+
+1. 删除需要判断是否已删除，是否有文件，是否已经分享（redis中可能存着分享的信息）。之后删除数据库相关的记录
+2. 分享需要在redis中看set中有没有分享记录，没有的话就去mysql中将表user_file_list中分享字段,之后更新redis中的记录
+
+还剩下一些功能可以评价代码详细查看，不再一一赘述。
+
+#### 最后总的看一下redis做的事情
+
+1. token
+2. 下载排行（file_pub_zset）
+3. 快速获取文件名（k:md5 + 文件名，v:文件名）,主要是为了但是文件名一致，md5不一致情况。
+
+### [分布式文件系统详解]()
+
+ ### [高负载nginx设计]()
 
 ### Q&A
 
