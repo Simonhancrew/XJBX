@@ -1,4 +1,6 @@
 //找到数组中的大多数
+#include <vector>
+using namespace std;
 
 class Solution {
 public:
