@@ -12,9 +12,9 @@ public:
     vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
         vector<vector<int>> res;
         vector<pair<int,int>> pt;
-        for(auto &b:buildings){
+        for(auto &b:buildings){//边界排序的问题，左端点的时候要先加入相同x下最大的。
             pt.push_back({b[0],-b[2]});
-            pt.push_back({b[1],b[2]});
+            pt.push_back({b[1],b[2]});// 右端点的时候
         }
         sort(pt.begin(),pt.end());
         multiset<int> height;
