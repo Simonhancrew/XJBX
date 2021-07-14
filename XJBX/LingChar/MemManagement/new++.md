@@ -175,5 +175,37 @@ p = new (arena) Point;
 
 实际的分析可以参考蓝色的答案,但实际我用msvc19复现的时候已经不会有placement delete的function语义出现了.
 
+### 3 delete和array delete
 
+关于delete的具体
+
+```
+Obj *tmp = new Obj(-1);
+
+delete tmp;
+```
+
+编译器会将其转换为
+
+```
+tmp->~Obj();// 先析构
+operateor delete(tmp); //之后释放内存 
+```
+
+operator delete其实也是调用的free。所以正常来讲，new的对象，一般是不能使用free直接释放的。
+
+最后关于array new和array delete
+
+```
+Obj* tmp = new Obj[3];
+// 这里会唤醒三次构造函数
+....
+delete[] tmp;// 同理这里会唤醒三次析构
+```
+
+所以误用delete的时候，是可能有影响的。delete这里只析构一次，
+
+所以，对于class with ptr通常都是有影响的，因为会导致内存泄露
+
+对于class只有正常类型（stack），可能没有影响。
 
