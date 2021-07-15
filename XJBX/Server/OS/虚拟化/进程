@@ -1,4 +1,4 @@
-## 进程，线程和调度算法
+## 进程
 
 ![导图](./pic/1.png)
 
@@ -28,3 +28,49 @@
 
 在操作系统中，是⽤进程控制块（process control block   PCB）数据结构来描述进程的
 
+PCB 是进程存在的唯⼀标识，这意味着⼀个进程的存在，必然会有⼀个 PCB，如果进程消失 了，那么 PCB 也会随之消失。
+
+看一下数据结构就知道了
+
+```
+// the registers xv6 will save and restore // to stop and subsequently restart a process struct context {
+    int eip;
+    int esp;
+    int ebx;
+    int ecx;
+    int edx;
+    int esi;
+    int edi;
+    int ebp; 
+};
+// the different states a process can be in 
+enum proc_state { UNUSED, EMBRYO, SLEEPING,
+					RUNNABLE, RUNNING, ZOMBIE };
+					
+// the information xv6 tracks about each process // including its register context and state 
+struct proc {
+	char *mem; 					// Start of process memory uint sz; // Size of process memory 
+	char *kstack; 				// Bottom of kernel stack
+    							// for this process
+    enum proc_state state;     	// Process state 
+    int pid;                    // Process ID
+    struct proc *parent;       	// Parent process
+    void *chan; 				// If !zero, sleeping on chan 
+    int killed; 				s// If !zero, has been killed
+    struct file *ofile[NOFILE]; // Open files
+    struct inode *cwd;         	// Current directory
+    struct context context;    	// Switch here to run process
+    struct trapframe *tf;     	// Trap frame for the
+    							// current interrupt
+};			
+```
+
+看到枚举类型中，还会有一个init状态和已经退出但是没有清理的final状态。
+
+我觉得这两个要着重关注一下，init表示进程创建时的状态。
+
+final，在unix中被成为僵尸状态（僵尸线程），这个状态很有用，因为它允许其他进程检查进程的返回代码，查看刚刚的进程有没有执行成功，完成后，父进程将执行最后一次调用（wait()），等待子进程的返回，并且操作系统随后被告知可以清理这个进程相关的数据结构。
+
+关于程序如何执行成为进程，首先从磁盘加载，之后为运行时的栈分配一些空间，，可能还会有一些初始的参数，就是main函数中的argc和argv，当然还可以用malloc从堆上分出内存去使用，另外还会初始化一些和io相关的任务。
+
+最后进入main函数，cpu的控制权转移到了新创建的进程中。
