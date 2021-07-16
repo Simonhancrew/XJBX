@@ -52,6 +52,16 @@ TCP经常问到的有三次握手，四次挥手，滑动窗口，慢启动，�
 
    > `netstat -napt`
 
+### 具体的包
+
+首先关注到第一个报文，syn，注意参考tcp中我写道的tcp的数据头格式。这里的序列号会随机初始化一个，syn位会置为一
+
+![tcp](./Pic/4.png)
+
+第二个报文回来，服务端也会随机一个序列号，确认应答号是在前面的客户端的序列号+1的，syn和ack置1
+
+最后第三次握手的时候，是可以携带数据的，前两次握手是不可以的
+
 ### 三次握手和为什么？
 
 原因：
@@ -91,4 +101,8 @@ static inline struct sock *__inet_lookup(struct net *net,
 流程就是先找est中有没有连接，再找listen中有没有连接，没得就返回rst。确认连接存在，且处于est，直接tcp_rcv_established()接受数据，否则进入tcp_rcv_state_process()。如果在第一次握手，进入acceptable = icsk->icsk_af_ops->conn_request(sk, skb) >= 0;
 
 此时conn_request为tcp_v4_conn_request()，在这个方法中进行第一次握手的处理。如果是第三次握手，此时tcp状态应为：TCP_SYN_RECV。
+
+### 关于MTU和MSS
+
+![6](./Pic/6.png)
 

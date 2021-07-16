@@ -22,9 +22,19 @@
 
 ### 关于time_wait
 
+出现tw主要有两个原因的考量
+
+1. 防⽌具有相同「四元组」的「旧」数据包被收到；
+2. 保证「被动关闭连接」的⼀⽅能被正确的关闭，即保证最后的 ACK 能让被动关闭⽅接收，从而帮助其正常关闭；
+
 time_wait主要为处理最后一次ack丢失的话，对面重传一个fin，我要能重传一个ack。RFC规定要等待两倍的MSL（一个数据分片（报文）在网络中能够生存的最长时间），这个时间也被RFC规定为2分钟。但是实际Linux的实现并不用等这么久
 
 TIME_WAIT状态只出现在主动关闭方，如果服务器上TIME_WAIT状态连接很多的话，需要占用较大的slab内存资源。Linux的实现中，TCP_TIME_WAIT等待时间被固定设置为60秒。然后还可能回占用很多端口资源，端口就65536个，用完了可就无法接受连接了。
+
+```
+#define TCP_TIMEWAIT_LEN (60*HZ) /* how long to wait to destroy TIME-WAIT
+									state, about 60 seconds  */
+```
 
 ### time_wait是否可以提前收回
 
