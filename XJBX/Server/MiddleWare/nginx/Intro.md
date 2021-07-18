@@ -101,9 +101,10 @@ events {
 http {
     include       mime.types;
     default_type  application/octet-stream;
-    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-    #                  '$status $body_bytes_sent "$http_referer" '
-    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+    # 日志格式
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
 
     #access_log  logs/access.log  main;
 
@@ -113,20 +114,23 @@ http {
     #keepalive_timeout  0;
     keepalive_timeout  65;
 
-    #gzip  on;
+    #gzip  on; #压缩相关
+	#gzip_min_length 50; 长度
+	#gzip_comp_level 2; 级别
+	#gzip_types text/plain; 要压缩的内容
 
     server {
         listen       80;
         server_name  localhost;
 
         #charset koi8-r;
-
-        #access_log  logs/host.access.log  main;
+		# 日志的存放处
+        access_log  logs/host.access.log  main;
 
         location / {
             charset utf-8;
-	    root   /home/space/;
-	    autoindex on;
+	    root   /home/space/; 此处可以使用alias
+	    autoindex on; 打开目录
 	    types{
 	    	video/webm mkv;
 	    }
@@ -216,3 +220,16 @@ types{
 ```
 
 另外location还可以用正则等做一个网址规则的匹配
+
+### 平滑升级
+
+可以拷贝旧文件，然后复制新文件到目录，之后执行
+
+```
+kill -USR2 ${原nginx pid}
+```
+
+就可以平滑升级
+
+### 反向代理的搭建
+
