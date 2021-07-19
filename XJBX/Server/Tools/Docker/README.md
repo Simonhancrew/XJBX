@@ -238,6 +238,98 @@ Deleted: sha256:d1165f2212346b2bab48cb01c1e39ee8ad1be46b87873d9ca7a4e434980a7726
 
 关于untagged和delete，镜像的唯⼀标识是其ID 和摘要，⽽⼀个镜像可以有多个标签，令删除镜像的时候，实际上是在要求删除某个标签的镜像
 
+### 具体操作一把
+
+先pull到nginx
+
+```
+han@ubuntu:~$ docker pull nginx:latest
+latest: Pulling from library/nginx
+b4d181a07f80: Pull complete 
+66b1c490df3f: Pull complete 
+d0f91ae9b44c: Pull complete 
+baf987068537: Pull complete 
+6bbc76cbebeb: Pull complete 
+32b766478bc2: Pull complete 
+Digest: sha256:353c20f74d9b6aee359f30e8e4f69c3d7eaea2f610681c4a95849a2fd7c497f9
+Status: Downloaded newer image for nginx:latest
+docker.io/library/nginx:latest
+
+```
+
+启动
+
+```
+han@ubuntu:~$ docker pull nginx:latest
+latest: Pulling from library/nginx
+b4d181a07f80: Pull complete 
+66b1c490df3f: Pull complete 
+d0f91ae9b44c: Pull complete 
+baf987068537: Pull complete 
+6bbc76cbebeb: Pull complete 
+32b766478bc2: Pull complete 
+Digest: sha256:353c20f74d9b6aee359f30e8e4f69c3d7eaea2f610681c4a95849a2fd7c497f9
+Status: Downloaded newer image for nginx:latest
+docker.io/library/nginx:latest
+```
+
+查看所有容器
+
+```
+han@ubuntu:~$ docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS                   PORTS                                   NAMES
+c65a7db873f5   nginx          "/docker-entrypoint.…"   5 minutes ago   Up 34 seconds            0.0.0.0:8080->80/tcp, :::8080->80/tcp   nginx
+500497c6f50b   d1165f221234   "/hello"                 4 hours ago     Exited (0) 4 hours ago                                           zen_cerf
+```
+
+停止,重启，进入容器
+
+```
+docker stop $container
+docker restart 
+#docker attach
+```
+
+容器不退出，返回宿主机 ctrl + p + q
+
+如果要导出某个容器,在外部
+
+```
+docker export df9c17f558df > ubuntu.tar
+```
+
+另外还有exec命令
+
+```
+docker exec -it 243c32535da7 /bin/bash
+```
+
+之后可以导出容器,docker export
+
+```
+han@ubuntu:~$ docker exec -it c65a7db873f5  bash
+root@c65a7db873f5:/# exit
+exit
+han@ubuntu:~$ docker export c65a7db873f5  > nginx.tar
+han@ubuntu:~$ ls
+clash  cloudDisk  examples.desktop  fastdfs  nginx.tar  project  share  software  study.sql  XJBX  公共的  模板  视频  图片  文档  下载  音乐  桌面
+```
+
+导入容器就是
+
+```
+cat nginx.tar | docker import - XXXXX
+```
+
+最后不用的容器，stop之后删除
+
+```
+han@ubuntu:~$ docker stop c65a7db873f5
+c65a7db873f5
+han@ubuntu:~$ docker rm c65a7db873f5
+c65a7db873f5
+```
+
 ### 利用commit理解镜像构成
 
 docker commit 命令除了学习之外，还有⼀些特殊的应⽤场合，⽐如被⼊侵后保存现场等。但 是，不要使⽤ docker commit 定制镜像，定制镜像应该使⽤ Dockerfile 来完成。
@@ -256,5 +348,70 @@ cd mynginx
 touch Dockerfile
 ```
 
+之后在Dockerfile中
 
+```
+From nginx
+Run echo '<h1>Hello  docker</h1>' > /usr/share/nginx/html/idex.html
+```
 
+之后在当前目录下执行编译
+
+```
+han@ubuntu:~/nginx$ docker build -t mynginx .
+Sending build context to Docker daemon  2.048kB
+Step 1/2 : From nginx
+latest: Pulling from library/nginx
+b4d181a07f80: Pull complete 
+66b1c490df3f: Pull complete 
+d0f91ae9b44c: Pull complete 
+baf987068537: Pull complete 
+6bbc76cbebeb: Pull complete 
+32b766478bc2: Pull complete 
+Digest: sha256:353c20f74d9b6aee359f30e8e4f69c3d7eaea2f610681c4a95849a2fd7c497f9
+Status: Downloaded newer image for nginx:latest
+ ---> 4cdc5dd7eaad
+Step 2/2 : Run echo '<h1>Hello  docker</h1>' > /usr/share/nginx/html/idex.html
+ ---> Running in 9d567d3224e8
+Removing intermediate container 9d567d3224e8
+ ---> a19401ff2eef
+Successfully built a19401ff2eef
+Successfully tagged mynginx:latest
+```
+
+看一下新的镜像
+
+```
+han@ubuntu:~/nginx$ docker image ls 
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+mynginx      latest    a19401ff2eef   42 seconds ago   133MB
+nginx        latest    4cdc5dd7eaad   12 days ago      133MB
+redis        6.0.8     16ecd2772934   8 months ago     104MB
+```
+
+定制镜像，一定是以一个镜像为基础的， FROM 就是指定基础镜像，因此⼀个 Dockerfile 中 FROM 是必备的指令，并且必须是第⼀条指令。
+
+如果没有找到对应服务的镜像，官⽅镜像中还提供了⼀些更为基础的操作系统镜像，如 ubuntu、 debian、centos、fedora、alpine 等，这些操作系统的软件库为我们提供了更⼴阔的扩展空 间。
+
+RUN 指令是⽤来执⾏命令⾏命令的。每一个run都是一个commit，需要注意的是可以多条合并的。
+
+```
+FROM debian:jessie
+
+ RUN buildDeps='gcc libc6-dev make' \
+     && apt-get update \
+     && apt-get install -y $buildDeps \
+     && wget -O redis.tar.gz "http://download.redis.io/releases/re dis-3.2.5.tar.gz" \
+     && mkdir -p /usr/src/redis \
+     && tar -xzf redis.tar.gz -C /usr/src/redis --strip-components =1 \
+     && make -C /usr/src/redis \
+     && make -C /usr/src/redis install \
+     && rm -rf /var/lib/apt/lists/* \
+     && rm redis.tar.gz \
+     && rm -r /usr/src/redis \
+     && apt-get purge -y --auto-remove $buildDeps
+```
+
+命令的最后添加了清理⼯作的命令，删除了为了编译构建所需要的软件，清理了 所有下载、展开的⽂件，并且还清理了 apt 缓存⽂件。这是很重要的⼀步，我们之前说过，镜像是多层 存储，每⼀层的东⻄并不会在下⼀层被删除，会⼀直跟随着镜像。因此镜像构建时，⼀定要确保每⼀层只 添加真正需要添加的东⻄，任何⽆关的东⻄都应该清理掉。
+
+这里参数很多，用到的时候再查文档吧
