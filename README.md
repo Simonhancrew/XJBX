@@ -121,7 +121,8 @@
 3. [docker](XJBX/Server/Tools//Docker)
 4. [valgrind](XJBX/Server/Tools/Valgrind/README.md)
 5. [gdb](XJBX/Server/Tools/GDB/README.md)
-6. cmake
+6. [简单实现一个Rpc](XJBX/Server/Tools/simpleRpc/README.md)
+7. cmake
 
 ## 项目
 
